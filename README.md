@@ -1,1 +1,1 @@
-<h3>Project work OPtimization Techniques for Machine Learning</h3>
+<h3>Project work Optimization Techniques for Machine Learning</h3>
