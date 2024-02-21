@@ -2,9 +2,9 @@ import numpy as np
 
 
 class Function(object):
-    def __init__(self):
-        self.lamda = 0.8
-        self.threshold = 0.5
+    def __init__(self, lamda, threshold):
+        self.lamda = lamda
+        self.threshold = threshold
 
     def loss_function(self, x, y, w):
         reg_term = self.lamda / 2 * np.linalg.norm(w) ** 2
