@@ -2,31 +2,11 @@ import numpy as np
 from tqdm import tqdm
 from DataSet import DataSet
 from numpy import linalg as la
+import matplotlib.pyplot as plt
+
 
 threshold = 0.5
-lambda_reg = 1
-
-
-def sigmoid(x):
-    x = np.array(x, np.float128)
-    return 1 / (1 + np.exp(-x))
-
-
-def testing(dataset, weights):
-    count = 0
-    for i in range(dataset.data_test.shape[0]):
-        prediction = predict(weights, dataset.data_test[i])
-        if dataset.labels_test[i] == prediction:
-            count = count + 1
-    return (count / dataset.data_test.shape[0]) * 100
-
-
-def predict(weights, data):
-    if sigmoid(np.dot(weights, data)) >= threshold:
-        return 1
-    else:
-        return -1
-
+lambda_reg = 0.8
 
 def gradient(X, y, weights):
     r = np.multiply(-y, sigmoid(np.multiply(-y, np.dot(X, weights))))
@@ -38,41 +18,32 @@ def compute_log_loss(X, y, w):
         np.log(1 + np.exp(-y * np.dot(X, w)))) + lambda_reg / 2 * la.norm(
         w) ** 2)
 
-def loss_gradient(X, y, w):
-    n = len(X)
-    reg_gradient = lambda_reg * w
-    logistic_gradient = np.zeros_like(w)
-    for i in range(n):
-        exponent = y[i] * np.dot(X[i], w)
-        logistic_gradient += - y[i] * X[i] / (1 + np.exp(exponent))
-
-    gradient = reg_gradient + logistic_gradient/n
-    return gradient
 
 
-def calculate_function(X, y, w):
-    reg_term = lambda_reg / 2 * np.linalg.norm(w) ** 2
-    loss_term = np.mean(np.logaddexp(0, -y * np.dot(X, w)))
-    total_value = reg_term + loss_term
-    return total_value
 
-dataset = DataSet("DataSet/new_australian.csv", ",", 0)
+seed_value = 27
+np.random.seed(seed_value)
+
+dataset = DataSet("DataSet/cod-rna-mod.csv", ",", 0)
 
 x = dataset.data_train
 y = dataset.labels_train
 x, y = np.array(x, dtype="float128"), np.array(y, dtype="float128")
 w = np.zeros(dataset.data_train.shape[1], dtype="float128")
 
-learn_rate = 1e-4
-batch_size = 1 #x.shape[0]
-n_iter = 50000
+learn_rate = 0.00001
+batch_size = 64  # x.shape[0]
+
+n_iter = 5
 n_obs = x.shape[0]
 xy = np.c_[x.reshape(n_obs, -1), y.reshape(n_obs, 1)]
 
 # Initializing the random number generator
 rng = np.random.default_rng()
 learn_rate = np.array(learn_rate)
-loss=0
+loss = 0
+x_plt = []
+y_plt=[]
 for ss in tqdm(range(n_iter)):
 
     rng.shuffle(xy)
@@ -82,15 +53,22 @@ for ss in tqdm(range(n_iter)):
         x_batch, y_batch = xy[start:stop, :-1], xy[start:stop, -1:]
         y_batch = np.squeeze(y_batch, axis=1)
 
-        grad = loss_gradient(x_batch, y_batch, w)
-        diff = -learn_rate * grad
-        w += diff
+        direction = loss_gradient(x_batch, y_batch, w)
+        w = w - learn_rate * direction  # armijo_line_search(x_batch, y_batch, w, -grad)
 
-    loss += calculate_function(x, y, w)
-    if (ss + 1) % 100 == 0:
-        print("Log loss: " + str(loss/100))
-        loss = 0
+    print("Train loss: " + str(loss_function(x, y, w)))
+    x_plt.append(ss)
+    y_plt.append(loss_function(x, y, w))
+    # loss += calculate_function(x, y, w)
+    # if (ss + 1) % 25 == 0:
+    #     print("Train loss epoch " + str(ss + 1) + ": " + str(loss / 10))
+    #     loss = 0
 
-    if (ss + 1) % 200 == 0:
+    if (ss + 1) % 10 == 0:
         acc = testing(dataset, w)
-        print("Accuracy: " + str(acc) + "%")
+        print("Accuracy epoch " + str(ss + 1) + ": " + str(acc) + "%")
+
+
+fig, ax = plt.subplots()
+ax.plot(x_plt, y_plt, linewidth=2.0)
+plt.show()
