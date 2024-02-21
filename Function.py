@@ -36,6 +36,6 @@ class Function(object):
     def testing(self, x_t, y_t, w):
         count = 0
         for i in range(x_t.shape[0]):
-            if y_t == self.predict(w, x_t[i]):
+            if y_t[i] == self.predict(w, x_t[i]):
                 count = count + 1
         return (count / x_t.shape[0]) * 100

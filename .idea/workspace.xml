@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="bo">
-      <change afterPath="$PROJECT_DIR$/Function.py" afterDir="false" />
+    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Top tier">
+      <change afterPath="$PROJECT_DIR$/DataSet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver_old.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preProcessDtaset.py" beforeDir="false" afterPath="$PROJECT_DIR$/preProcessDtaset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Function.py" beforeDir="false" afterPath="$PROJECT_DIR$/Function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -214,7 +214,7 @@
       <workItem from="1708467345670" duration="5137000" />
       <workItem from="1708497203908" duration="7802000" />
       <workItem from="1708506560858" duration="366000" />
-      <workItem from="1708520289489" duration="6100000" />
+      <workItem from="1708520289489" duration="7284000" />
     </task>
     <task id="LOCAL-00001" summary="Start project">
       <option name="closed" value="true" />
@@ -248,7 +248,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708505616624</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Create new scheleton">
+      <option name="closed" value="true" />
+      <created>1708530843120</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708530843120</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Top tier">
+      <option name="closed" value="true" />
+      <created>1708531323647</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708531323647</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,10 +286,12 @@
     <MESSAGE value="GD first implementation" />
     <MESSAGE value="armijo implementation" />
     <MESSAGE value="bo" />
-    <option name="LAST_COMMIT_MESSAGE" value="bo" />
+    <MESSAGE value="Create new scheleton" />
+    <MESSAGE value="Top tier" />
+    <option name="LAST_COMMIT_MESSAGE" value="Top tier" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Project_Work_Optimization$test.coverage" NAME="test Coverage Results" MODIFIED="1708530260305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_Work_Optimization$test.coverage" NAME="test Coverage Results" MODIFIED="1708531949992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$Solver.coverage" NAME="Solver Coverage Results" MODIFIED="1708472375168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1708506917712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$preProcessDtaset.coverage" NAME="preProcessDtaset Coverage Results" MODIFIED="1708521384847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

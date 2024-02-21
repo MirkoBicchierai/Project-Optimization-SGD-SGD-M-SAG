@@ -1,9 +1,12 @@
+import numpy as np
+from tqdm import tqdm
+
+
 class Solver:
     def __init__(self, precision):
         self.precision = precision
 
-    def sgd(self):
-        dataset = DataSet("DataSet/cod-rna-mod.csv", ",", 0)
+    def sgd(self, f, dataset, epochs):
 
         x = dataset.data_train
         y = dataset.labels_train
@@ -13,7 +16,6 @@ class Solver:
         learn_rate = 0.00001
         batch_size = 64  # x.shape[0]
 
-        n_iter = 5
         n_obs = x.shape[0]
         xy = np.c_[x.reshape(n_obs, -1), y.reshape(n_obs, 1)]
 
@@ -23,7 +25,7 @@ class Solver:
         loss = 0
         x_plt = []
         y_plt = []
-        for ss in tqdm(range(n_iter)):
+        for epoch in tqdm(range(epochs)):
 
             rng.shuffle(xy)
             # Performing minibatch moves
@@ -32,17 +34,17 @@ class Solver:
                 x_batch, y_batch = xy[start:stop, :-1], xy[start:stop, -1:]
                 y_batch = np.squeeze(y_batch, axis=1)
 
-                direction = loss_gradient(x_batch, y_batch, w)
+                direction = f.loss_gradient(x_batch, y_batch, w)
                 w = w - learn_rate * direction  # armijo_line_search(x_batch, y_batch, w, -grad)
 
-            print("Train loss: " + str(loss_function(x, y, w)))
-            x_plt.append(ss)
-            y_plt.append(loss_function(x, y, w))
+            print("Train loss: " + str(f.loss_function(x, y, w)))
+            x_plt.append(epoch)
+            y_plt.append(f.loss_function(x, y, w))
             # loss += calculate_function(x, y, w)
             # if (ss + 1) % 25 == 0:
             #     print("Train loss epoch " + str(ss + 1) + ": " + str(loss / 10))
             #     loss = 0
 
-            if (ss + 1) % 10 == 0:
-                acc = testing(dataset, w)
-                print("Accuracy epoch " + str(ss + 1) + ": " + str(acc) + "%")
+            if (epoch + 1) % 10 == 0:
+                acc = f.testing(dataset.data_test, dataset.labels_test, w)
+                print("Accuracy epoch " + str(epoch + 1) + ": " + str(acc) + "%")
