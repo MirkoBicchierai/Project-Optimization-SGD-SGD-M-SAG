@@ -8,8 +8,10 @@ class DataSet:
         self.labels_test = []
         self.data_train = []
         self.data_test = []
+        self.name = ""
 
-    def load_data(self, path, delimiter, col_label):
+    def load_data(self, path, delimiter, col_label, name):
+        self.name = name
         full_data = (np.genfromtxt(path, delimiter=delimiter, usemask=True))[1:]
         np.random.shuffle(full_data)
         split_index = int(0.8 * len(full_data))

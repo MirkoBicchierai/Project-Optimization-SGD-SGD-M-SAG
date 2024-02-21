@@ -1,4 +1,5 @@
 import numpy as np
+from numpy import arange
 from tqdm import tqdm
 import time
 
@@ -26,13 +27,8 @@ class Solver:
                 direction = f.loss_gradient(x_batch, y_batch, w)
                 w = w - learn_rate * direction
 
-            print("Train loss: " + str(f.loss_function(x, y, w)))
             x_plt.append(epoch)
             y_plt.append(f.loss_function(x, y, w))
-
-            if (epoch + 1) % 10 == 0:
-                acc = f.testing(dataset.data_test, dataset.labels_test, w)
-                print("Accuracy epoch " + str(epoch + 1) + ": " + str(acc) + "%")
 
             if x_times:
                 last_element = x_times[-1]
@@ -40,7 +36,7 @@ class Solver:
                 last_element = 0
             x_times.append((time.time() - start_time) + last_element)
 
-        return w, x_plt, y_plt, x_times
+        return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
 
     def sgd_momentum(self, f, dataset, epochs, learn_rate, batch_size, beta):
 
@@ -67,6 +63,25 @@ class Solver:
                 diff = beta * diff - learn_rate * direction
                 w += diff
 
+            x_plt.append(epoch)
+            y_plt.append(f.loss_function(x, y, w))
+
+            if x_times:
+                last_element = x_times[-1]
+            else:
+                last_element = 0
+            x_times.append((time.time() - start_time) + last_element)
+
+        return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
+
+    def sag(self, f, dataset, epochs, learn_rate, batch_size):
+        x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
+        w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+
+        x_plt, y_plt, x_times = [], [], []
+        for epoch in tqdm(range(epochs)):
+            start_time = time.time()
+
             print("Train loss: " + str(f.loss_function(x, y, w)))
             x_plt.append(epoch)
             y_plt.append(f.loss_function(x, y, w))
@@ -81,4 +96,4 @@ class Solver:
                 last_element = 0
             x_times.append((time.time() - start_time) + last_element)
 
-        return w, x_plt, y_plt, x_times
+        return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
