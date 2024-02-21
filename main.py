@@ -1,25 +1,36 @@
-import numpy as np
 from DataSet import DataSet
+from Function import Function
 from Solver import Solver
+import matplotlib.pyplot as plt
 
-from scipy.optimize import minimize
-from numpy import linalg as la
+
+def plot(file_name, x, y):
+    fig, ax = plt.subplots()
+    ax.plot(x, y, linewidth=2.0)
+    plt.savefig("Plot/" + file_name)
+
 
 if __name__ == '__main__':
-    seed_value = 27
-    np.random.seed(seed_value)
+    lamda = 0.8
+    threshold = 0.5
+    precision = 0.000001
+    split = 0.8
 
-    maxIterations = 1000
-    precision = 0.0000001
+    f = Function(lamda, threshold)
+    dataset = DataSet(split)
+    exe = Solver(precision)
 
-    dataset = DataSet("DataSet/new_australian.csv", ",", 0)
-    exe = Solver(maxIterations, precision)
+    # COD-RNA DATASET
+    dataset.load_data("DataSet/cod-rna.csv", ",", 0)
+    lr = 1e-7  # 1e-8
+    batch_size = 1
+    epochs = 50
+    beta = 0.25
 
-    W1 = exe.gd(dataset)
+    _, x_step, y_loss, x_times = exe.sgd(f, dataset, epochs, lr, batch_size)
+    plot("cod-rna/sgd_result_" + str(lr) + "_" + str(batch_size) + ".png", x_step, y_loss)
+    plot("cod-rna/sgd_result_" + str(lr) + "_" + str(batch_size) + "_time.png", x_times, y_loss)
 
-    W2 = exe.sgd(dataset, 0.01, 10)
-
-    w = minimize(dataset.compute_log_loss, np.zeros(dataset.data_train.shape[1]), jac=dataset.gradient)
-    print("SCIPY", w.x)
-    print("SGD:", la.norm(dataset.compute_log_loss(W2) - dataset.compute_log_loss(w.x)))
-    print("GD:", la.norm(dataset.compute_log_loss(W1) - dataset.compute_log_loss(w.x)))
+    _, x_step, y_loss, x_times = exe.sgd_momentum(f, dataset, epochs, lr, batch_size, beta)
+    plot("cod-rna/sgd_momentum_result_" + str(lr) + "_" + str(batch_size) + "_" + str(beta) + ".png", x_step, y_loss)
+    plot("cod-rna/sgd_momentum_result_" + str(lr) + "_" + str(batch_size) + "_" + str(beta) + "_time.png", x_times, y_loss)
