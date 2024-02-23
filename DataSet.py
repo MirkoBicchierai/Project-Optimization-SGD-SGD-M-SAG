@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.datasets import load_svmlight_file
 
 
 class DataSet:
@@ -10,17 +11,14 @@ class DataSet:
         self.data_test = []
         self.name = ""
 
-    def load_data(self, path, delimiter, col_label, name):
+    def load_data(self, path, name):
         self.name = name
-        full_data = (np.genfromtxt(path, delimiter=delimiter, usemask=True))[1:]
-        np.random.shuffle(full_data)
-        split_index = int(0.8 * len(full_data))
-        self.labels_train = full_data[:split_index, col_label]
-        self.labels_test = full_data[split_index:, col_label]
-        tmp = np.delete(full_data, col_label, axis=1)
 
-        ones_column = np.ones((tmp.shape[0], 1))
-        tmp_2 = np.hstack((tmp, ones_column))
-
-        self.data_train = tmp_2[:split_index, :]
-        self.data_test = tmp_2[split_index:, :]
+        data = load_svmlight_file(path)
+        tmp_x = data[0].toarray()
+        tmp_y = data[1]
+        split_index = int(0.8 * len(tmp_x))
+        self.labels_train = tmp_y[:split_index]
+        self.labels_test = tmp_y[split_index:]
+        self.data_train = tmp_x[:split_index]
+        self.data_test = tmp_x[split_index:]

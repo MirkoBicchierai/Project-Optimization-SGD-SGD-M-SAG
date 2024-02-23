@@ -1,8 +1,6 @@
 import numpy as np
-from numpy import arange
 from tqdm import tqdm
 import time
-from numpy import linalg as LA
 
 
 class Solver:
@@ -93,17 +91,84 @@ class Solver:
             start_time = time.time()
 
             idx = np.random.randint(0, n_samples)
-            # if idx not in list_gen:
-            #     list_gen.append(idx)
             g = f.loss_gradient(X[idx:idx + 1], y[idx:idx + 1], w)
             d = d - memory[idx] + g
             memory[idx] = d
             w -= (learn_rate / n_samples) * d  # len(list_gen)
 
-            # if lipschitzEstimate(f, L, epoch, X[idx:idx + 1], y[idx:idx + 1], w):
-            #     L = L * 2
-            #
-            # w -= (1 / (L * n_samples)) * d  # len(list_gen)
+            x_plt.append(epoch)
+            y_plt.append(f.loss_function(X, y, w))
+            x_times.append((time.time() - start_time) + x_times[-1])
+
+        return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
+
+    def sag_algorithm_B(self, f, dataset, epochs, learn_rate, batch_size):
+
+        X, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
+        n_samples, n_features = X.shape
+
+        w = np.zeros(n_features, dtype="float128")
+
+        x_plt, y_plt, x_times = [], [], []
+        x_plt.append(0)
+        x_times.append(0)
+        y_plt.append(f.loss_function(X, y, w))
+
+        gradient_memory = np.zeros((n_samples, n_features))  # Store gradients for each sample
+        average_gradient = np.zeros(n_features)  # Initialize the average gradient
+
+        for epoch in tqdm(range(epochs)):
+            start_time = time.time()
+
+            indices = np.random.choice(n_samples, batch_size, replace=False)  # Randomly pick a mini-batch
+            X_batch, y_batch = X[indices], y[indices]
+            batch_gradient = f.loss_gradient(X_batch, y_batch, w)  # Compute gradient for the mini-batch
+
+            # Update the running average gradient
+
+            for i in indices:
+                old_gradient = gradient_memory[i]
+                average_gradient += (batch_gradient - old_gradient) / n_samples
+                gradient_memory[i] = batch_gradient
+
+            w -= learn_rate * average_gradient  # Update the parameters
+
+            x_plt.append(epoch)
+            y_plt.append(f.loss_function(X, y, w))
+            x_times.append((time.time() - start_time) + x_times[-1])
+
+        return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
+
+    def sag_algorithm_LS(self, f, dataset, epochs):
+
+        X, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
+        n_samples, n_features = X.shape
+
+        w = np.zeros(n_features, dtype="float128")
+        memory = np.zeros((n_samples, n_features))
+        d = np.mean(memory, axis=0)
+
+        x_plt, y_plt, x_times = [], [], []
+        x_plt.append(0)
+        x_times.append(0)
+        y_plt.append(f.loss_function(X, y, w))
+
+        list_gen = []
+        L = 1
+        for epoch in tqdm(range(epochs)):
+            start_time = time.time()
+
+            idx = np.random.randint(0, n_samples)
+            # if idx not in list_gen:
+            #     list_gen.append(idx)
+            g = f.loss_gradient(X[idx:idx + 1], y[idx:idx + 1], w)
+            d = d - memory[idx] + g
+            memory[idx] = d
+            #w -= (learn_rate / n_samples) * d  # len(list_gen)
+
+            if lipschitzEstimate(f, L, epoch, X[idx:idx + 1], y[idx:idx + 1], w):
+                L = L * 2
+            w -= (1 / (pow(L, epoch))) * d  # len(list_gen)
 
             x_plt.append(epoch)
             y_plt.append(f.loss_function(X, y, w))
@@ -119,7 +184,7 @@ def lipschitzEstimate(f, L, k, X, y, w):
     if norm > pow(10, -8):
         new_w = w - (1 / pow(L, k)) * grad
         new_loss = f.loss_function(X, y, new_w)
-        if new_loss <= old_loss - 1 / (2 * pow(L, k)) * norm:
+        if new_loss >= old_loss - 1 / (2 * pow(L, k)) * norm:
             return False
         else:
             return True

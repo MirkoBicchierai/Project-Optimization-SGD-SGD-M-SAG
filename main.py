@@ -31,21 +31,21 @@ if __name__ == '__main__':
     threshold = 0.5
     precision = 0.000001
     split = 0.8
+    epochs = 100
 
     f = Function(lamda, threshold)
     dataset = DataSet(split)
     exe = Solver(precision)
 
     # COD-RNA DATASET
-    dataset.load_data("DataSet/cod-rna.csv", ",", 0, "cod-rna")
+    dataset.load_data("DataSet/cod-rna", "cod-rna")
     lr = 1e-7  # 1e-8
-    epochs = 50
     beta = 0.25
 
     x_time_all = []
     y_loss_all = []
     x_step_all = []
-    labels = ["SGD", "SGD-M", "SAG"]
+    labels = ["SGD", "SGD-M", "SAG", "SAG-B", "SAG-LS"]
 
     print("DataSet: COD-RNA")
 
@@ -68,7 +68,8 @@ if __name__ == '__main__':
     print("Accuracy SGD Momentum:", acc)
 
     print("SAG Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-7)
+    batch_size = int(dataset.data_train.shape[0] / 4)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-4)
     plot(dataset.name + "/sag_result_" + str(lr) + ".png", x_step, y_loss)
     plot(dataset.name + "/sag_result_" + str(lr) + "_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -76,12 +77,31 @@ if __name__ == '__main__':
     x_step_all.append(x_step)
     print("Accuracy SAG:", acc)
 
+    print("SAG-BATCH Algorithms")
+    batch_size = int(dataset.data_train.shape[0] / 4)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 1e-4, batch_size)
+    plot(dataset.name + "/sag_B_result_" + str(lr) + ".png", x_step, y_loss)
+    plot(dataset.name + "/sag_B_result_" + str(lr) + "_time.png", x_times, y_loss)
+    x_time_all.append(x_times)
+    y_loss_all.append(y_loss)
+    x_step_all.append(x_step)
+    print("Accuracy SAG:", acc)
+
+    print("SAG-LS Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
+    plot(dataset.name + "/sag_LS_result_" + str(lr) + ".png", x_step, y_loss)
+    plot(dataset.name + "/sag_LS_result_" + str(lr) + "_time.png", x_times, y_loss)
+    # x_time_all.append(x_times)
+    # y_loss_all.append(y_loss)
+    # x_step_all.append(x_step)
+    print("Accuracy SAG:", acc)
+
     plot_full(dataset.name + "/full_step_result_last_run.png", labels, x_step_all, y_loss_all, "Epochs")
     plot_full(dataset.name + "/full_time_result_last_run.png", labels, x_time_all, y_loss_all, "Time")
 
-    dataset.load_data("DataSet/australian.csv", ",", 0, "australian")
+    print("DataSet: Australian")
+    dataset.load_data("DataSet/australian_scale", "australian")
     lr = 1e-8  # 1e-8
-    epochs = 50
     beta = 0.2
 
     x_time_all = []
@@ -107,13 +127,34 @@ if __name__ == '__main__':
     print("Accuracy SGD Momentum:", acc)
 
     print("SAG Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-7)
+    batch_size = int(dataset.data_train.shape[0] / 4)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-8)
     plot(dataset.name + "/sag_result_" + str(lr) + ".png", x_step, y_loss)
     plot(dataset.name + "/sag_result_" + str(lr) + "_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
     print("Accuracy SAG:", acc)
+
+    print("SAG-BATCH Algorithms")
+    batch_size = int(dataset.data_train.shape[0] / 4)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 1e-6, batch_size)
+    plot(dataset.name + "/sag_B_result_" + str(lr) + ".png", x_step, y_loss)
+    plot(dataset.name + "/sag_B_result_" + str(lr) + "_time.png", x_times, y_loss)
+    x_time_all.append(x_times)
+    y_loss_all.append(y_loss)
+    x_step_all.append(x_step)
+    print("Accuracy SAG:", acc)
+
+    print("SAG-LS Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
+    plot(dataset.name + "/sag_LS_result_" + str(lr) + ".png", x_step, y_loss)
+    plot(dataset.name + "/sag_LS_result_" + str(lr) + "_time.png", x_times, y_loss)
+    # x_time_all.append(x_times)
+    # y_loss_all.append(y_loss)
+    # x_step_all.append(x_step)
+    print("Accuracy SAG:", acc)
+
 
     plot_full(dataset.name + "/full_step_result_last_run.png", labels, x_step_all, y_loss_all, "Epochs")
     plot_full(dataset.name + "/full_time_result_last_run.png", labels, x_time_all, y_loss_all, "Time")
