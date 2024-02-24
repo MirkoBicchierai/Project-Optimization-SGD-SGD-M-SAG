@@ -23,6 +23,9 @@ class DataSet:
         tmp_x = tmp_x[indices, :]
         tmp_y = tmp_y[indices]
 
+        ones_column = np.ones((tmp_x.shape[0], 1))
+        tmp_x = np.hstack((tmp_x, ones_column))
+
         split_index = int(0.8 * len(tmp_x))
         self.labels_train = tmp_y[:split_index]
         self.labels_test = tmp_y[split_index:]

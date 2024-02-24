@@ -100,6 +100,7 @@ class Solver:
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
 
+
     def sag_algorithm_B(self, f, dataset, epochs, learn_rate, batch_size):
 
         X, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
@@ -112,24 +113,25 @@ class Solver:
         x_times.append(0)
         y_plt.append(f.loss_function(X, y, w))
 
-        gradient_memory = np.zeros((n_samples, n_features))  # Store gradients for each sample
-        average_gradient = np.zeros(n_features)  # Initialize the average gradient
+        gradient_memory = np.zeros((n_samples, n_features))
+        average_gradient = np.zeros(n_features)
 
         for epoch in tqdm(range(epochs)):
             start_time = time.time()
 
-            indices = np.random.choice(n_samples, batch_size, replace=False)  # Randomly pick a mini-batch
-            X_batch, y_batch = X[indices], y[indices]
-            batch_gradient = f.loss_gradient(X_batch, y_batch, w)  # Compute gradient for the mini-batch
+            indices = np.random.choice(n_samples, batch_size, replace=False)
 
-            # Update the running average gradient
+            X_batch, y_batch = X[indices], y[indices]
+            batch_gradient = f.loss_gradient(X_batch, y_batch, w)  # Calcolo il gradiente per il mini batch
+
+            # Aggiorno la media dei gradienti per ogni indice generato
 
             for i in indices:
                 old_gradient = gradient_memory[i]
                 average_gradient += (batch_gradient - old_gradient) / n_samples
                 gradient_memory[i] = batch_gradient
 
-            w -= learn_rate * average_gradient  # Update the parameters
+            w -= learn_rate * average_gradient  # Update di w_k+1
 
             x_plt.append(epoch)
             y_plt.append(f.loss_function(X, y, w))
