@@ -3,9 +3,12 @@ from numpy import linalg as LA
 
 
 class Function(object):
-    def __init__(self, lamda, threshold):
-        self.lamda = lamda
+    def __init__(self, threshold):
+        self.lamda = 0
         self.threshold = threshold
+
+    def set_lamda(self, lamda):
+        self.lamda = lamda
 
     def loss_function(self, x, y, w):
         reg_term = self.lamda / 2 * np.linalg.norm(w) ** 2

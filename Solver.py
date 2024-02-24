@@ -4,8 +4,6 @@ import time
 
 
 class Solver:
-    def __init__(self, precision):
-        self.precision = precision
 
     def sgd(self, f, dataset, epochs, learn_rate, batch_size):
         rng = np.random.default_rng()
