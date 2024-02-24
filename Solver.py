@@ -49,6 +49,7 @@ class Solver:
         y_plt.append(f.loss_function(x, y, w))
 
         diff = 0
+        w_memory_momentum = np.zeros(dataset.data_train.shape[1], dtype="float128")
         for epoch in tqdm(range(epochs)):
             start_time = time.time()
             rng.shuffle(xy)
@@ -58,8 +59,8 @@ class Solver:
                 y_batch = np.squeeze(y_batch, axis=1)
 
                 direction = f.loss_gradient(x_batch, y_batch, w)
-
-                diff = beta * diff - learn_rate * direction
+                diff = beta * (w - w_memory_momentum) - learn_rate * direction
+                w_memory_momentum = w
                 w += diff
 
             x_plt.append(epoch)
@@ -84,7 +85,6 @@ class Solver:
         y_plt.append(f.loss_function(X, y, w))
 
         list_gen = []
-        # L = 100
         for epoch in tqdm(range(epochs)):
             start_time = time.time()
 
@@ -162,7 +162,6 @@ class Solver:
             g = f.loss_gradient(X[idx:idx + 1], y[idx:idx + 1], w)
             d = d - memory[idx] + g
             memory[idx] = d
-            #w -= (learn_rate / n_samples) * d  # len(list_gen)
 
             if lipschitzEstimate(f, L, epoch, X[idx:idx + 1], y[idx:idx + 1], w):
                 L = L * 2
