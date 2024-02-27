@@ -1,5 +1,7 @@
 import numpy as np
+from scipy import sparse
 from sklearn.datasets import load_svmlight_file
+from scipy.sparse import csr_matrix, hstack
 
 
 class DataSet:
@@ -13,7 +15,6 @@ class DataSet:
 
     def load_data(self, path, name):
         self.name = name
-
         data = load_svmlight_file(path)
         tmp_x = data[0].toarray()
         tmp_y = data[1]
