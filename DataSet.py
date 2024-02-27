@@ -1,7 +1,5 @@
 import numpy as np
-from scipy import sparse
 from sklearn.datasets import load_svmlight_file
-from scipy.sparse import csr_matrix, hstack
 
 
 class DataSet:
@@ -36,3 +34,23 @@ class DataSet:
     def fix(self, numer):
         self.labels_train[self.labels_train == numer] = -1
         self.labels_test[self.labels_test == numer] = -1
+
+    # This two function is only for scipy to minimize with LBFGS-B
+    def loss_function(self, w):
+        lamda = 1 / self.data_train.shape[0]
+        reg_term = lamda / 2 * np.linalg.norm(w) ** 2
+        loss_term = np.mean(np.logaddexp(0, - self.labels_train * np.dot(self.data_train, w)))
+        total_value = reg_term + loss_term
+        return total_value
+
+    def loss_gradient(self, w):
+        lamda = 1 / self.data_train.shape[0]
+        n = len(self.data_train)
+        reg_gradient = lamda * w
+        logistic_gradient = np.zeros_like(w)
+        for i in range(n):
+            exponent = self.labels_train[i] * np.dot(self.data_train[i], w)
+            logistic_gradient += - self.labels_train[i] * self.data_train[i] / (1 + np.exp(exponent))
+
+        gradient = reg_gradient + logistic_gradient / n
+        return gradient

@@ -120,9 +120,7 @@ class Solver:
             indices = np.random.choice(n_samples, batch_size, replace=False)
 
             X_batch, y_batch = X[indices], y[indices]
-            batch_gradient = f.loss_gradient(X_batch, y_batch, w)  # Calcolo il gradiente per il mini batch
-
-            # Aggiorno la media dei gradienti per ogni indice generato
+            batch_gradient = f.loss_gradient(X_batch, y_batch, w)
 
             for i in indices:
                 old_gradient = gradient_memory[i]
@@ -165,7 +163,7 @@ class Solver:
             d = d + - memory[idx] + g  # eq
             memory[idx] = d
 
-            L = self.lipschitzEstimate(f, X[idx:idx + 1], y[idx:idx + 1], w)
+            L = self.lipschitzEstimate(f, X[idx:idx + 1], y[idx:idx + 1], w, n_samples)
             w -= ((1 / L) / n_samples) * d
 
             x_plt.append(epoch)
@@ -174,19 +172,20 @@ class Solver:
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
 
-    def lipschitzEstimate(self, f, X, y, w):
+    def lipschitzEstimate(self, f, X, y, w, n):
         l_lip = 1
-        max_iter = 1000
+        max_iter = 100
         c = 0
         old_loss = f.loss_function(X, y, w)
         grad = f.loss_gradient(X, y, w)
         norm = pow(np.linalg.norm(grad), 2)
-        # if norm > pow(10, -8):
-        new_w = w - (1 / l_lip) * grad
-        new_loss = f.loss_function(X, y, new_w)
-        while new_loss > old_loss - 1 / (2 * l_lip) * norm and c < max_iter:
-            l_lip = l_lip * (1 / pow(2, -(1 / X.shape[0])))
-            c = c + 1
+        if norm > pow(10, -8):
+            new_w = w - (1 / l_lip) * grad
+            new_loss = f.loss_function(X, y, new_w)
+
+            while new_loss > old_loss - 1 / (2 * l_lip) * norm and c < max_iter:
+                l_lip = l_lip * (1 / pow(2, -(1 / n)) )
+                c = c + 1
 
         return l_lip
 
@@ -205,12 +204,14 @@ class Solver:
         d = np.mean(memory, axis=0)
         t = np.zeros(n_features)
         agg = np.zeros(n_features)
+
         c = np.zeros(n_samples)
         m = 0
         w_memory = np.zeros((n_features, epochs))
 
         for epoch in tqdm(range(epochs)):
             start_time = time.time()
+
             idx = np.random.randint(0, n_samples)
 
             if c[idx] == 0:
@@ -218,7 +219,7 @@ class Solver:
                 c[idx] = 1
 
             if learning_rate == "L-LS":
-                learning_rate = 1 / (16*n_samples*self.lipschitzEstimate(f, X[idx:idx + 1], y[idx:idx + 1], w))
+                learning_rate = 1 / (16*n_samples*self.lipschitzEstimate(f, X[idx:idx + 1], y[idx:idx + 1], w, n_samples))
 
             for j in range(len(X[idx])):
                 if X[idx][j] == 0:

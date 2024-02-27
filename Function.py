@@ -1,5 +1,4 @@
 import numpy as np
-from numpy import linalg as LA
 
 
 class Function(object):
@@ -15,10 +14,6 @@ class Function(object):
         loss_term = np.mean(np.logaddexp(0, -y * np.dot(x, w)))
         total_value = reg_term + loss_term
         return total_value
-
-    # def loss_function(self, x, y, w):
-    #     return np.sum(np.log(1 + np.exp(-y * np.dot(x, w))))/x.shape[0] + (self.lamda/2) * LA.norm(
-    #         w) ** 2
 
     def loss_gradient(self, x, y, w):
         n = len(x)
