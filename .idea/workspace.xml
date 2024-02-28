@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Modify main and add sag v2 version, (pre ricevimento)">
+    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Add LBFGS-B To full plot and bug fix to lipschitzEstimate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Function.py" beforeDir="false" afterPath="$PROJECT_DIR$/Function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -45,28 +44,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Solver.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.preProcessDtaset.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.test2.executor": "Run",
-    "Python.testBro.executor": "Run",
-    "Python.testsus.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/mirko/PycharmProjects/Project Work Optimization/DataSet",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Solver.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.preProcessDtaset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.testBro.executor&quot;: &quot;Run&quot;,
+    &quot;Python.testsus.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/mirko/PycharmProjects/Project Work Optimization/DataSet&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/DataSet" />
@@ -293,7 +292,12 @@
       <workItem from="1709018274283" duration="1030000" />
       <workItem from="1709039671566" duration="1494000" />
       <workItem from="1709046902653" duration="2152000" />
-      <workItem from="1709057178034" duration="6949000" />
+      <workItem from="1709057178034" duration="13581000" />
+      <workItem from="1709108776466" duration="4416000" />
+      <workItem from="1709117760979" duration="3053000" />
+      <workItem from="1709124482576" duration="5246000" />
+      <workItem from="1709131199537" duration="77000" />
+      <workItem from="1709135662666" duration="7425000" />
     </task>
     <task id="LOCAL-00001" summary="Start project">
       <option name="closed" value="true" />
@@ -415,7 +419,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708994223590</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Add LBFGS-B To full plot and bug fix to lipschitzEstimate">
+      <option name="closed" value="true" />
+      <created>1709065747539</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1709065747539</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -448,7 +460,8 @@
     <MESSAGE value="Add all dataset and fix sgd with momentum" />
     <MESSAGE value="Add a feature (all 1) in dataloader for convert in unbiased" />
     <MESSAGE value="Modify main and add sag v2 version, (pre ricevimento)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modify main and add sag v2 version, (pre ricevimento)" />
+    <MESSAGE value="Add LBFGS-B To full plot and bug fix to lipschitzEstimate" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add LBFGS-B To full plot and bug fix to lipschitzEstimate" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$testBro.coverage" NAME="testBro Coverage Results" MODIFIED="1708677564653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -457,6 +470,6 @@
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$Solver.coverage" NAME="Solver Coverage Results" MODIFIED="1708961641342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1708506917712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$preProcessDtaset.coverage" NAME="preProcessDtaset Coverage Results" MODIFIED="1708521384847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1709065312805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1709143450062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

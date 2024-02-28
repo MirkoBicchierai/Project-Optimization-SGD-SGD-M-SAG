@@ -12,6 +12,7 @@ def print_callback(wk):
     global list_w_LBFGSB
     list_w_LBFGSB.append(wk)
 
+
 def fill_to_n_with_last_element(lst, N):
     if len(lst) >= N:
         return lst[:N]
@@ -45,113 +46,10 @@ def plot_full(file_name, label, x, y, x_label):
     plt.savefig("Plot/" + file_name)
 
 
-def skin_nonskin(f, dataset, epochs):
-    global list_w_LBFGSB
-    list_w_LBFGSB = []
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-B", "SAG-LS", "SAGV2-LS"]
-
-    print("-------------------------------------------------------------------")
-    print("DataSet: skin_nonskin")
-
-    dataset.load_data("DataSet/skin_nonskin", "skin_nonskin")
-    dataset.fix(2)
-    f.set_lamda(1 / dataset.data_train.shape[0])
-    lr = 1e-8  # 1e-8
-    beta = 0.2
-
-    x_time_all = []
-    y_loss_all = []
-    x_step_all = []
-
-    print("Samples: " + str(dataset.data_train.shape[0]) + "  features: " + str(dataset.data_train.shape[1]))
-    print("-------------------------------------------------------------------")
-
-    w = np.zeros(dataset.data_train.shape[1], dtype="float128")
-    sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
-                jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
-    list_w_LBFGSB = [w] + list_w_LBFGSB
-    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs+1)
-    list_f_LBFGSB = []
-    list_epoch = []
-    for i in range(len(list_w_LBFGSB)):
-        list_epoch.append(i)
-        list_f_LBFGSB.append(dataset.loss_function(list_w_LBFGSB[i]))
-    x_step_all.append(list_epoch)
-    y_loss_all.append(list_f_LBFGSB)
-
-    print("SGD Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr, 1)
-    plot(dataset.name + "/sgd_result.png", x_step, y_loss)
-    plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SGD:", acc)
-
-    print("SGD-M Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, 1, beta)
-    plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
-    plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SGD Momentum:", acc)
-
-    print("SAG Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
-    plot(dataset.name + "/sag_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG:", acc)
-
-    print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs, 0.0000001)
-    plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAGV2:", acc)
-
-    print("SAG-BATCH Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 1e-4, batch_size)
-    plot(dataset.name + "/sag_B_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_B_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG-BATCH:", acc)
-
-    print("SAG-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
-    plot(dataset.name + "/sag_LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_LS_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG-LS:", acc)
-
-    print("SAGV2-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs)
-    plot(dataset.name + "/sagV2-LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2-LS_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAGV2-LS:", acc)
-
-    plot_full(dataset.name + "/full_step_result_last_run.png", labels, x_step_all, y_loss_all, "Epochs")
-    plot_full(dataset.name + "/full_time_result_last_run.png", labels, x_time_all, y_loss_all, "Time")
-
-
 def german_numer_scale(f, dataset, epochs):
     global list_w_LBFGSB
     list_w_LBFGSB = []
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-B", "SAG-LS", "SAGV2-LS"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: german_numer_scale")
@@ -172,7 +70,7 @@ def german_numer_scale(f, dataset, epochs):
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
-    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs+1)
+    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs + 1)
     list_f_LBFGSB = []
     list_epoch = []
     for i in range(len(list_w_LBFGSB)):
@@ -182,7 +80,7 @@ def german_numer_scale(f, dataset, epochs):
     y_loss_all.append(list_f_LBFGSB)
 
     print("SGD Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr, 1)
+    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr)
     plot(dataset.name + "/sgd_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -191,7 +89,7 @@ def german_numer_scale(f, dataset, epochs):
     print("Accuracy SGD:", acc)
 
     print("SGD-M Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, 1, beta)
+    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, beta)
     plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -201,7 +99,7 @@ def german_numer_scale(f, dataset, epochs):
 
     print("SAG Algorithms")
     batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 4 * 1e-2)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -210,7 +108,7 @@ def german_numer_scale(f, dataset, epochs):
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs, 0.01)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -218,29 +116,19 @@ def german_numer_scale(f, dataset, epochs):
     x_step_all.append(x_step)
     print("Accuracy SAGV2:", acc)
 
-    print("SAG-BATCH Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 0.5, batch_size)
-    plot(dataset.name + "/sag_B_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_B_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG-BATCH:", acc)
-
-    print("SAG-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
-    plot(dataset.name + "/sag_LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_LS_result_time.png", x_times, y_loss)
+    print("SAG-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs)
+    plot(dataset.name + "/sag_L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sag_L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
     print("Accuracy SAG-LS:", acc)
 
-    print("SAGV2-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs)
-    plot(dataset.name + "/sagV2-LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2-LS_result_time.png", x_times, y_loss)
+    print("SAGV2-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs)
+    plot(dataset.name + "/sagV2-L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sagV2-L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
@@ -253,7 +141,7 @@ def german_numer_scale(f, dataset, epochs):
 def phishing(f, dataset, epochs):
     global list_w_LBFGSB
     list_w_LBFGSB = []
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-B", "SAG-LS", "SAGV2-LS"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: phishing")
@@ -275,7 +163,7 @@ def phishing(f, dataset, epochs):
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
-    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs+1)
+    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs + 1)
     list_f_LBFGSB = []
     list_epoch = []
     for i in range(len(list_w_LBFGSB)):
@@ -285,7 +173,7 @@ def phishing(f, dataset, epochs):
     y_loss_all.append(list_f_LBFGSB)
 
     print("SGD Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr, 1)
+    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr)
     plot(dataset.name + "/sgd_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -294,7 +182,7 @@ def phishing(f, dataset, epochs):
     print("Accuracy SGD:", acc)
 
     print("SGD-M Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, 1, beta)
+    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, beta)
     plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -304,7 +192,7 @@ def phishing(f, dataset, epochs):
 
     print("SAG Algorithms")
     batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 4 * 1e1)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -313,7 +201,7 @@ def phishing(f, dataset, epochs):
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs, 7 * 0.01)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -321,29 +209,19 @@ def phishing(f, dataset, epochs):
     x_step_all.append(x_step)
     print("Accuracy SAGV2:", acc)
 
-    print("SAG-BATCH Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 1e1, batch_size)
-    plot(dataset.name + "/sag_B_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_B_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG-BATCH:", acc)
-
-    print("SAG-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
-    plot(dataset.name + "/sag_LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_LS_result_time.png", x_times, y_loss)
+    print("SAG-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs)
+    plot(dataset.name + "/sag_L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sag_L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
     print("Accuracy SAG-LS:", acc)
 
-    print("SAGV2-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs)
-    plot(dataset.name + "/sagV2-LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2-LS_result_time.png", x_times, y_loss)
+    print("SAGV2-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs)
+    plot(dataset.name + "/sagV2-L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sagV2-L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
@@ -356,7 +234,7 @@ def phishing(f, dataset, epochs):
 def ijcnn1(f, dataset, epochs):
     global list_w_LBFGSB
     list_w_LBFGSB = []
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-B", "SAG-LS", "SAGV2-LS"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: ijcnn1")
@@ -377,7 +255,7 @@ def ijcnn1(f, dataset, epochs):
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
-    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs+1)
+    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs + 1)
     list_f_LBFGSB = []
     list_epoch = []
     for i in range(len(list_w_LBFGSB)):
@@ -387,7 +265,7 @@ def ijcnn1(f, dataset, epochs):
     y_loss_all.append(list_f_LBFGSB)
 
     print("SGD Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr, 1)
+    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr)
     plot(dataset.name + "/sgd_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -396,7 +274,7 @@ def ijcnn1(f, dataset, epochs):
     print("Accuracy SGD:", acc)
 
     print("SGD-M Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, 1, beta)
+    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, beta)
     plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -405,7 +283,8 @@ def ijcnn1(f, dataset, epochs):
     print("Accuracy SGD Momentum:", acc)
 
     print("SAG Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e1)
+    batch_size = int(dataset.data_train.shape[0] / 4)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -414,7 +293,7 @@ def ijcnn1(f, dataset, epochs):
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs, 4 * 0.01)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -422,29 +301,19 @@ def ijcnn1(f, dataset, epochs):
     x_step_all.append(x_step)
     print("Accuracy SAGV2:", acc)
 
-    print("SAG-BATCH Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 2, batch_size)
-    plot(dataset.name + "/sag_B_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_B_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG-BATCH:", acc)
-
-    print("SAG-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
-    plot(dataset.name + "/sag_LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_LS_result_time.png", x_times, y_loss)
+    print("SAG-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs)
+    plot(dataset.name + "/sag_L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sag_L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
     print("Accuracy SAG-LS:", acc)
 
-    print("SAGV2-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs)
-    plot(dataset.name + "/sagV2-LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2-LS_result_time.png", x_times, y_loss)
+    print("SAGV2-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs)
+    plot(dataset.name + "/sagV2-L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sagV2-L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
@@ -457,15 +326,15 @@ def ijcnn1(f, dataset, epochs):
 def a5a(f, dataset, epochs):
     global list_w_LBFGSB
     list_w_LBFGSB = []
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-B", "SAG-LS", "SAGV2-LS"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: a5a")
 
     dataset.load_data("DataSet/a5a", "a5a")
     f.set_lamda(1 / dataset.data_train.shape[0])
-    lr = 1e-2  # 1e-8
-    beta = 0.3
+    lr = 1e-4  # 1e-8
+    beta = 0.45
 
     x_time_all = []
     y_loss_all = []
@@ -475,10 +344,11 @@ def a5a(f, dataset, epochs):
     print("-------------------------------------------------------------------")
 
     w = np.zeros(dataset.data_train.shape[1], dtype="float128")
-    sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
-                jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
+    sol = sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
+                      jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs}).x
+    print("Norm solution:", np.linalg.norm(sol))
     list_w_LBFGSB = [w] + list_w_LBFGSB
-    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs+1)
+    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs + 1)
     list_f_LBFGSB = []
     list_epoch = []
     for i in range(len(list_w_LBFGSB)):
@@ -488,7 +358,7 @@ def a5a(f, dataset, epochs):
     y_loss_all.append(list_f_LBFGSB)
 
     print("SGD Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr, 1)
+    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr)
     plot(dataset.name + "/sgd_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -497,7 +367,7 @@ def a5a(f, dataset, epochs):
     print("Accuracy SGD:", acc)
 
     print("SGD-M Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, 1, beta)
+    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, beta)
     plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -507,7 +377,7 @@ def a5a(f, dataset, epochs):
 
     print("SAG Algorithms")
     batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -516,7 +386,7 @@ def a5a(f, dataset, epochs):
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs, 0.1)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -524,29 +394,19 @@ def a5a(f, dataset, epochs):
     x_step_all.append(x_step)
     print("Accuracy SAGV2:", acc)
 
-    print("SAG-BATCH Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 1, batch_size)
-    plot(dataset.name + "/sag_B_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_B_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG-BATCH:", acc)
-
-    print("SAG-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
-    plot(dataset.name + "/sag_LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_LS_result_time.png", x_times, y_loss)
+    print("SAG-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs)
+    plot(dataset.name + "/sag_L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sag_L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
     print("Accuracy SAG-LS:", acc)
 
-    print("SAGV2-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs)
-    plot(dataset.name + "/sagV2-LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2-LS_result_time.png", x_times, y_loss)
+    print("SAGV2-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs)
+    plot(dataset.name + "/sagV2-L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sagV2-L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
@@ -559,7 +419,7 @@ def a5a(f, dataset, epochs):
 def skin_nonskin(f, dataset, epochs):
     global list_w_LBFGSB
     list_w_LBFGSB = []
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-B", "SAG-LS", "SAGV2-LS"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: skin_nonskin")
@@ -581,7 +441,7 @@ def skin_nonskin(f, dataset, epochs):
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
-    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs+1)
+    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs + 1)
     list_f_LBFGSB = []
     list_epoch = []
     for i in range(len(list_w_LBFGSB)):
@@ -591,7 +451,7 @@ def skin_nonskin(f, dataset, epochs):
     y_loss_all.append(list_f_LBFGSB)
 
     print("SGD Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr, 1)
+    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr)
     plot(dataset.name + "/sgd_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -600,7 +460,7 @@ def skin_nonskin(f, dataset, epochs):
     print("Accuracy SGD:", acc)
 
     print("SGD-M Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, 1, beta)
+    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, beta)
     plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -619,7 +479,7 @@ def skin_nonskin(f, dataset, epochs):
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs, 3 * 0.0000001)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -627,29 +487,19 @@ def skin_nonskin(f, dataset, epochs):
     x_step_all.append(x_step)
     print("Accuracy SAGV2:", acc)
 
-    print("SAG-BATCH Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 1e-4, batch_size)
-    plot(dataset.name + "/sag_B_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_B_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG-BATCH:", acc)
-
-    print("SAG-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
-    plot(dataset.name + "/sag_LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_LS_result_time.png", x_times, y_loss)
+    print("SAG-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs)
+    plot(dataset.name + "/sag_L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sag_L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
     print("Accuracy SAG-LS:", acc)
 
-    print("SAGV2-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs)
-    plot(dataset.name + "/sagV2-LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2-LS_result_time.png", x_times, y_loss)
+    print("SAGV2-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs)
+    plot(dataset.name + "/sagV2-L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sagV2-L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
@@ -662,7 +512,7 @@ def skin_nonskin(f, dataset, epochs):
 def cod_rna(f, dataset, epochs):
     global list_w_LBFGSB
     list_w_LBFGSB = []
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-B", "SAG-LS", "SAGV2-LS"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: COD-RNA")
@@ -682,7 +532,7 @@ def cod_rna(f, dataset, epochs):
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
-    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs+1)
+    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs + 1)
     list_f_LBFGSB = []
     list_epoch = []
     for i in range(len(list_w_LBFGSB)):
@@ -692,7 +542,7 @@ def cod_rna(f, dataset, epochs):
     y_loss_all.append(list_f_LBFGSB)
 
     print("SGD Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr, 1)
+    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr)
     plot(dataset.name + "/sgd_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -701,7 +551,7 @@ def cod_rna(f, dataset, epochs):
     print("Accuracy SGD:", acc)
 
     print("SGD-M Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, 1, beta)
+    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, beta)
     plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -711,7 +561,7 @@ def cod_rna(f, dataset, epochs):
 
     print("SAG Algorithms")
     batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-4)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -720,7 +570,7 @@ def cod_rna(f, dataset, epochs):
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs, 0.000001)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -728,29 +578,19 @@ def cod_rna(f, dataset, epochs):
     x_step_all.append(x_step)
     print("Accuracy SAGV2:", acc)
 
-    print("SAG-BATCH Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 1e-4, batch_size)
-    plot(dataset.name + "/sag_B_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_B_result_time.png", x_times, y_loss)
-    x_time_all.append(x_times)
-    y_loss_all.append(y_loss)
-    x_step_all.append(x_step)
-    print("Accuracy SAG-BATCH:", acc)
-
-    print("SAG-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
-    plot(dataset.name + "/sag_LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_LS_result_time.png", x_times, y_loss)
+    print("SAG-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs)
+    plot(dataset.name + "/sag_L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sag_L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
     print("Accuracy SAG-LS:", acc)
 
-    print("SAGV2-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs)
-    plot(dataset.name + "/sagV2-LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2-LS_result_time.png", x_times, y_loss)
+    print("SAGV2-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs)
+    plot(dataset.name + "/sagV2-L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sagV2-L_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
     y_loss_all.append(y_loss)
     x_step_all.append(x_step)
@@ -763,15 +603,15 @@ def cod_rna(f, dataset, epochs):
 def australian(f, dataset, epochs):
     global list_w_LBFGSB
     list_w_LBFGSB = []
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-B", "SAG-LS", "SAGV2-LS"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: Australian")
 
     dataset.load_data("DataSet/australian_scale", "australian")
     f.set_lamda(1 / dataset.data_train.shape[0])
-    lr = 1e-2  # 1e-8
-    beta = 0.25
+    lr = 1e-3
+    beta = 0.4
 
     x_time_all = []
     y_loss_all = []
@@ -781,10 +621,11 @@ def australian(f, dataset, epochs):
     print("-------------------------------------------------------------------")
 
     w = np.zeros(dataset.data_train.shape[1], dtype="float128")
-    sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
-                jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
+    sol = sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
+                      jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs}).x
+    print("Norm solution:", np.linalg.norm(sol))
     list_w_LBFGSB = [w] + list_w_LBFGSB
-    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs+1)
+    list_w_LBFGSB = fill_to_n_with_last_element(list_w_LBFGSB, epochs + 1)
     list_f_LBFGSB = []
     list_epoch = []
     for i in range(len(list_w_LBFGSB)):
@@ -794,7 +635,7 @@ def australian(f, dataset, epochs):
     y_loss_all.append(list_f_LBFGSB)
 
     print("SGD Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr, 1)
+    _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr)
     plot(dataset.name + "/sgd_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -803,7 +644,7 @@ def australian(f, dataset, epochs):
     print("Accuracy SGD:", acc)
 
     print("SGD-M Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, 1, beta)
+    _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr, beta)
     plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
     plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -813,49 +654,39 @@ def australian(f, dataset, epochs):
 
     print("SAG Algorithms")
     batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-3)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
-    # x_time_all.append(x_times)
-    # y_loss_all.append(y_loss)
-    # x_step_all.append(x_step)
+    x_time_all.append(x_times)
+    y_loss_all.append(y_loss)
+    x_step_all.append(x_step)
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs, 0.01)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
-    # x_time_all.append(x_times)
-    # y_loss_all.append(y_loss)
-    # x_step_all.append(x_step)
+    x_time_all.append(x_times)
+    y_loss_all.append(y_loss)
+    x_step_all.append(x_step)
     print("Accuracy SAGV2:", acc)
 
-    print("SAG-BATCH Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_B(f, dataset, epochs, 1, batch_size)
-    plot(dataset.name + "/sag_B_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_B_result_time.png", x_times, y_loss)
-    # x_time_all.append(x_times)
-    # y_loss_all.append(y_loss)
-    # x_step_all.append(x_step)
-    print("Accuracy SAG-BATCH:", acc)
-
-    print("SAG-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS(f, dataset, epochs)
-    plot(dataset.name + "/sag_LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sag_LS_result_time.png", x_times, y_loss)
-    # x_time_all.append(x_times)
-    # y_loss_all.append(y_loss)
-    # x_step_all.append(x_step)
+    print("SAG-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs)
+    plot(dataset.name + "/sag_L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sag_L_result_time.png", x_times, y_loss)
+    x_time_all.append(x_times)
+    y_loss_all.append(y_loss)
+    x_step_all.append(x_step)
     print("Accuracy SAG-LS:", acc)
 
-    print("SAGV2-LS Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_LS_2(f, dataset, epochs)
-    plot(dataset.name + "/sagV2-LS_result.png", x_step, y_loss)
-    plot(dataset.name + "/sagV2-LS_result_time.png", x_times, y_loss)
-    # x_time_all.append(x_times)
-    # y_loss_all.append(y_loss)
-    # x_step_all.append(x_step)
+    print("SAGV2-L Algorithms")
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs)
+    plot(dataset.name + "/sagV2-L_result.png", x_step, y_loss)
+    plot(dataset.name + "/sagV2-L_result_time.png", x_times, y_loss)
+    x_time_all.append(x_times)
+    y_loss_all.append(y_loss)
+    x_step_all.append(x_step)
     print("Accuracy SAGV2-LS:", acc)
 
     plot_full(dataset.name + "/full_step_result_last_run.png", labels, x_step_all, y_loss_all, "Epochs")
@@ -866,15 +697,15 @@ if __name__ == '__main__':
     threshold = 0.5
     split = 0.8
     epochs = 50
-
+    np.random.seed(20)
     f = Function(threshold)
     dataset = DataSet(split)
     exe = Solver()
 
-    # australian(f, dataset, epochs)  # ok
-    skin_nonskin(f,dataset,epochs) #OK
-    # german_numer_scale(f, dataset, epochs) #  ok
-    # phishing(f, dataset, epochs) # sus
-    # ijcnn1(f, dataset, epochs) # ok
-    # a5a(f, dataset, epochs) # ok
-    # cod_rna(f, dataset, epochs) # sus
+    australian(f, dataset, epochs)  # ok
+    # skin_nonskin(f, dataset, epochs)  # SUS
+    # german_numer_scale(f, dataset, epochs)  # ok
+    # phishing(f, dataset, epochs)  # ok/sus
+    # ijcnn1(f, dataset, epochs)  # ok
+    # a5a(f, dataset, epochs)  # ok
+    # cod_rna(f, dataset, epochs)  # SUS
