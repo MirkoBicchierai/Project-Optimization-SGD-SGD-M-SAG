@@ -56,7 +56,7 @@ def german_numer_scale(f, dataset, epochs):
 
     dataset.load_data("DataSet/german_numer_scale", "german_numer_scale")
     f.set_lamda(1 / dataset.data_train.shape[0])
-    lr = 1e-2  # 1e-8
+    lr = 5*1e-4  # 1e-8
     beta = 0.15
 
     x_time_all = []
@@ -66,7 +66,7 @@ def german_numer_scale(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0]) + "  features: " + str(dataset.data_train.shape[1]))
     print("-------------------------------------------------------------------")
 
-    w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+    w = np.ones(dataset.data_train.shape[1], dtype="float128")
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
@@ -99,7 +99,7 @@ def german_numer_scale(f, dataset, epochs):
 
     print("SAG Algorithms")
     batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -108,7 +108,7 @@ def german_numer_scale(f, dataset, epochs):
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-4)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -159,7 +159,7 @@ def phishing(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0]) + "  features: " + str(dataset.data_train.shape[1]))
     print("-------------------------------------------------------------------")
 
-    w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+    w = np.ones(dataset.data_train.shape[1], dtype="float128")
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
@@ -251,7 +251,7 @@ def ijcnn1(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0]) + "  features: " + str(dataset.data_train.shape[1]))
     print("-------------------------------------------------------------------")
 
-    w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+    w = np.ones(dataset.data_train.shape[1], dtype="float128")
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
@@ -343,7 +343,7 @@ def a5a(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0]) + "  features: " + str(dataset.data_train.shape[1]))
     print("-------------------------------------------------------------------")
 
-    w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+    w = np.ones(dataset.data_train.shape[1], dtype="float128")
     sol = sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                       jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs}).x
     print("Norm solution:", np.linalg.norm(sol))
@@ -437,7 +437,7 @@ def skin_nonskin(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0]) + "  features: " + str(dataset.data_train.shape[1]))
     print("-------------------------------------------------------------------")
 
-    w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+    w = np.onrd(dataset.data_train.shape[1], dtype="float128")
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
@@ -469,8 +469,7 @@ def skin_nonskin(f, dataset, epochs):
     print("Accuracy SGD Momentum:", acc)
 
     print("SAG Algorithms")
-    batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-9)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -479,7 +478,7 @@ def skin_nonskin(f, dataset, epochs):
     print("Accuracy SAG:", acc)
 
     print("SAGV2 Algorithms")
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-3)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, 1e-9)
     plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
     plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -528,7 +527,7 @@ def cod_rna(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0]) + "  features: " + str(dataset.data_train.shape[1]))
     print("-------------------------------------------------------------------")
 
-    w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+    w = np.ones(dataset.data_train.shape[1], dtype="float128")
     sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                 jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs})
     list_w_LBFGSB = [w] + list_w_LBFGSB
@@ -610,7 +609,7 @@ def australian(f, dataset, epochs):
 
     dataset.load_data("DataSet/australian_scale", "australian")
     f.set_lamda(1 / dataset.data_train.shape[0])
-    lr = 1e-3
+    lr = 5*1e-4
     beta = 0.4
 
     x_time_all = []
@@ -620,7 +619,7 @@ def australian(f, dataset, epochs):
 
     print("-------------------------------------------------------------------")
 
-    w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+    w = np.ones(dataset.data_train.shape[1], dtype="float128")
     sol = sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                       jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs}).x
     print("Norm solution:", np.linalg.norm(sol))
@@ -654,7 +653,7 @@ def australian(f, dataset, epochs):
 
     print("SAG Algorithms")
     batch_size = int(dataset.data_train.shape[0] / 4)
-    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-2)
+    _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, 1e-3)
     plot(dataset.name + "/sag_result.png", x_step, y_loss)
     plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
     x_time_all.append(x_times)
@@ -697,15 +696,15 @@ if __name__ == '__main__':
     threshold = 0.5
     split = 0.8
     epochs = 50
-    np.random.seed(20)
+    np.random.seed(17)
     f = Function(threshold)
     dataset = DataSet(split)
     exe = Solver()
 
-    australian(f, dataset, epochs)  # ok
-    # skin_nonskin(f, dataset, epochs)  # SUS
-    # german_numer_scale(f, dataset, epochs)  # ok
-    # phishing(f, dataset, epochs)  # ok/sus
+    ustralian(f, dataset, epochs)  # OK
+    # skin_nonskin(f, dataset, epochs)  # NO
+    # german_numer_scale(f, dataset, epochs)  # OK
+    # phishing(f, dataset, epochs)  # ok/no
     # ijcnn1(f, dataset, epochs)  # ok
-    # a5a(f, dataset, epochs)  # ok
-    # cod_rna(f, dataset, epochs)  # SUS
+    # a5a(f, dataset, epochs)  # NO
+    # cod_rna(f, dataset, epochs)  # no

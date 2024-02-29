@@ -7,7 +7,9 @@ class Solver:
 
     def sgd(self, f, dataset, epochs, learn_rate):
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
-        w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+        # w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+        w = np.ones(dataset.data_train.shape[1], dtype="float128")
+
         n_obs = x.shape[0]
         learn_rate = np.array(learn_rate)
         x_plt, y_plt, x_times = [], [], []
@@ -34,7 +36,8 @@ class Solver:
     def sgd_momentum(self, f, dataset, epochs, learn_rate, beta):
 
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
-        w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+        # w = np.zeros(dataset.data_train.shape[1], dtype="float128")
+        w = np.ones(dataset.data_train.shape[1], dtype="float128")
         n_obs = x.shape[0]
         beta = np.array(beta, dtype="float128")
         learn_rate = np.array(learn_rate, dtype="float128")
@@ -44,7 +47,7 @@ class Solver:
         y_plt.append(f.loss_function(x, y, w))
 
         v_index = list(range(n_obs))
-        w_memory_momentum = np.zeros(dataset.data_train.shape[1], dtype="float128")
+        w_memory_momentum = w
         for epoch in tqdm(range(epochs)):
             np.random.shuffle(v_index)
             start_time = time.time()
@@ -63,9 +66,9 @@ class Solver:
     def sag_algorithm(self, f, dataset, epochs, learn_rate="L-LS"):
 
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
-        n_samples, n_features = X.shape
+        n_samples, n_features = x.shape
 
-        w = np.zeros(n_features, dtype="float128")
+        w = np.ones(n_features, dtype="float128")
         memory = np.zeros((n_samples, n_features))
         d = np.mean(memory, axis=0)
 
@@ -84,7 +87,8 @@ class Solver:
                 d = d - memory[i] + g
                 memory[i] = g
                 if learn_rate == "L-LS":
-                    lr = (1 / 16 * self.lipschitz_estimate(f, x[i:i + 1], y[i:i + 1], w, n_samples))
+                    l = self.lipschitz_estimate(f, x[i:i + 1], y[i:i + 1], w)
+                    lr = (1 / (16 * l))
                 else:
                     lr = learn_rate
                 w -= (lr / n_samples) * d
@@ -95,30 +99,27 @@ class Solver:
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
 
-    def lipschitz_estimate(self, f, x, y, w, n):
-
-        l_lip = 1
-        max_iter = 50
-        c = 0
+    def lipschitz_estimate(self, f, x, y, w):
+        l_lip = 100
+        max_iter = 100
         old_loss = f.loss_function(x, y, w)
-        grad = f.loss_gradient(x, y, w)
-        norm = pow(np.linalg.norm(grad), 2)
-        if norm > pow(10, -8):
+        norm = pow(np.linalg.norm(old_loss), 2)
 
-            new_w = w - (1 / l_lip) * grad
+        for sus in range(max_iter):
+            new_w = w - (1 / l_lip) * old_loss
             new_loss = f.loss_function(x, y, new_w)
+            if new_loss <= old_loss - (1 / (2 * l_lip)) * norm:
+                break
 
-            while new_loss > old_loss - 1 / (2 * l_lip) * norm and c < max_iter:
-                l_lip = l_lip * 2  # (1 / pow(2, -(1 / n))) n, X.shape[0]
-                c = c + 1
-
+            l_lip = l_lip * 2
         return l_lip
 
     def sag_algorithm_v2(self, f, dataset, epochs, lr="L-LS"):
 
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
-        n_samples, n_features = X.shape
-        w = np.zeros(n_features, dtype="float128")
+        n_samples, n_features = x.shape
+        # w = np.zeros(n_features, dtype="float128")
+        w = np.ones(n_features, dtype="float128")
 
         x_plt, y_plt, x_times = [], [], []
         x_plt.append(0)
@@ -138,18 +139,16 @@ class Solver:
             c = np.zeros(n_samples)
             m = 0
             np.random.shuffle(v_index)
-
             start_time = time.time()
-
             counter = 0
             for idx in v_index:
-
                 if c[idx] == 0:
                     m = m + 1
                     c[idx] = 1
 
                 if lr == "L-LS":
-                    learning_rate = 1 / (16 * self.lipschitz_estimate(f, X[idx:idx + 1], y[idx:idx + 1], w, n_samples))
+                    l = self.lipschitz_estimate(f, x[idx:idx + 1], y[idx:idx + 1], w)
+                    learning_rate = (1 / (16 * l))
                 else:
                     learning_rate = lr
 
