@@ -321,7 +321,7 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
-        print("Accuracy SGD:", acc)
+        print("Accuracy SGD: " + str(round(acc, 2)) + "%")
 
     if "SGD-M" in labels:
         print("SGD-M Algorithms")
@@ -331,7 +331,7 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
-        print("Accuracy SGD Momentum:", acc)
+        print("Accuracy SGD Momentum: " + str(round(acc, 2)) + "%")
 
     if "SAG" in labels:
         print("SAG Algorithms")
@@ -342,7 +342,7 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
-        print("Accuracy SAG:", acc)
+        print("Accuracy SAG: " + str(round(acc, 2)) + "%")
 
     if "SAGV2" in labels:
         print("SAGV2 Algorithms")
@@ -352,7 +352,7 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
-        print("Accuracy SAGV2:", acc)
+        print("Accuracy SAGV2: " + str(round(acc, 2)) + "%")
 
     if "SAG-L" in labels:
         print("SAG-L Algorithms")
@@ -362,7 +362,7 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
-        print("Accuracy SAG-LS:", acc)
+        print("Accuracy SAG-LS: " + str(round(acc, 2)) + "%")
 
     if "SAGV2-L" in labels:
         print("SAGV2-L Algorithms")
@@ -372,7 +372,7 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
-        print("Accuracy SAGV2-LS:", acc)
+        print("Accuracy SAGV2-LS: " + str(round(acc, 2)) + "%")
 
     plot_full(dataset.name + "/full_step_result_last_run.png", labels, x_step_all, y_loss_all, "Epochs")
     plot_full(dataset.name + "/full_time_result_last_run.png", labels, x_time_all, y_loss_all, "Time")
@@ -394,7 +394,7 @@ if __name__ == '__main__':
     # ijcnn1(f, dataset, epochs)  # ok
     # cod_rna(f, dataset, epochs)  # OK 500
 
-    # australian(f, dataset, epochs)  # OK 100 seed(17)
+    australian(f, dataset, epochs)  # OK 100 seed(17)
     # a5a(f, dataset, epochs)  # OK 500
     # a6a(f, dataset, epochs)  # DA VEDERE IPER-LENTO
     # a7a(f, dataset, epochs) # DA VEDERE IPER-LENTO

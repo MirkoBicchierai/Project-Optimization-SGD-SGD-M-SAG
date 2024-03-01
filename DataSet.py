@@ -42,7 +42,8 @@ class DataSet:
         percentage_1 = (count_1 / total_elements) * 100
         percentage_minus_1 = (count_minus_1 / total_elements) * 100
 
-        print("Balance train-set: 1: " + str(percentage_1) + "% -1: " + str(percentage_minus_1)+"%")
+        print(
+            "Balance train-set: 1: " + str(round(percentage_1, 2)) + "% -1: " + str(round(percentage_minus_1, 2)) + "%")
 
     # This two function is only for scipy to minimize with LBFGS-B
     def loss_function(self, w):
