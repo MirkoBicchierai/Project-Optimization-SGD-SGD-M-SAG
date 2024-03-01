@@ -4,6 +4,13 @@ import time
 
 
 class Solver:
+    """
+        def sgd(self, f, dataset, epochs, learn_rate):
+
+        Method to run SGD Algorithm to found the optimal value of W.
+        This method implements the standard SGD Algorithm with constant step size, passed as parameters of the function.
+
+    """
 
     def sgd(self, f, dataset, epochs, learn_rate):
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
@@ -33,10 +40,18 @@ class Solver:
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
 
+    """
+        sgd_momentum(self, f, dataset, epochs, learn_rate, beta)::
+
+        Method to run SGD Algorithm with momentum to found the optimal value of W. 
+        This method implements the SGD Algorithm with constant step size and constant momentum term,
+        both passed as parameters of the function (learn_rate, beta).
+        
+    """
+
     def sgd_momentum(self, f, dataset, epochs, learn_rate, beta):
 
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
-        # w = np.zeros(dataset.data_train.shape[1], dtype="float128")
         w = np.ones(dataset.data_train.shape[1], dtype="float128")
         n_obs = x.shape[0]
         beta = np.array(beta, dtype="float128")
@@ -62,6 +77,16 @@ class Solver:
             x_times.append((time.time() - start_time) + x_times[-1])
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
+
+    """
+        sag_algorithm_v2(self, f, dataset, epochs, lr="L-LS"):
+
+        Method to run SAG Algorithm to found the optimal value of W. 
+        This method implements the standard SAG Algorithm.
+        
+        If nothing is passed as the "lr" (learning rate) parameter, a learning rate of 1/16L will be used, 
+        with L being the Lipschitz constant, found using a line search.
+    """
 
     def sag_algorithm(self, f, dataset, epochs, learn_rate="L-LS"):
 
@@ -98,6 +123,15 @@ class Solver:
             x_times.append((time.time() - start_time) + x_times[-1])
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
+
+    """
+        sag_algorithm_v2(self, f, dataset, epochs, lr="L-LS"):
+        
+        Method to run SAG Algorithm to found the optimal value of W. 
+        This method implements SAG Algorithm with all the "trick" described in the paper at section 4.
+        If nothing is passed as the "lr" (learning rate) parameter, a learning rate of 1/16L will be used, 
+        with L being the Lipschitz constant, found using a line search.
+    """
 
     def sag_algorithm_v2(self, f, dataset, epochs, lr="L-LS"):
 
@@ -168,6 +202,13 @@ class Solver:
             y_plt.append(f.loss_function(x, y, w))
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
+
+    """
+        lipschitz_estimate(self, f, x, y, w):
+        
+        Method to do the line search to found the lipschitz constant L, starting by initial value of L = 1
+        This line search is described in the paper at section 4.6.
+    """
 
     def lipschitz_estimate(self, f, x, y, w):
         l_lip = 1

@@ -11,6 +11,11 @@ class DataSet:
         self.data_test = []
         self.name = ""
 
+    """
+        This method load the dataset by a path of a dataset (passed by arguments path), and split it into training 
+        and test sets (80% for train and 20% for test sets), after a simple shuffle
+    """
+
     def load_data(self, path, name):
         self.name = name
         data = load_svmlight_file(path)
@@ -31,9 +36,19 @@ class DataSet:
         self.data_train = tmp_x[:split_index]
         self.data_test = tmp_x[split_index:]
 
+    """
+        This method is used to change the label value , 
+        in case there is a dataset that has values other than -1 for the second label
+    """
+
     def fix(self, numer):
         self.labels_train[self.labels_train == numer] = -1
         self.labels_test[self.labels_test == numer] = -1
+
+    """
+        This method print the balance of the current dataset, 
+        the percentage of the label "1" and the percentage of the label "-1" inside the train set of the dataset.
+    """
 
     def print_balance(self):
         count_1 = np.count_nonzero(self.labels_train == 1)
@@ -45,7 +60,11 @@ class DataSet:
         print(
             "Balance train-set: 1: " + str(round(percentage_1, 2)) + "% -1: " + str(round(percentage_minus_1, 2)) + "%")
 
-    # This two function is only for scipy to minimize with LBFGS-B
+    """
+        The following 2 two method are the same inside function Class, 
+        there are duplicated used for the method "minimize" of scipy.optimize.minimize library
+    """
+
     def loss_function(self, w):
         lamda = 1 / self.data_train.shape[0]
         reg_term = lamda / 2 * np.linalg.norm(w) ** 2

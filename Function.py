@@ -9,11 +9,20 @@ class Function(object):
     def set_lamda(self, lamda):
         self.lamda = lamda
 
+    """
+    This method implements the function loss of the logist regression with a strongly-convex regularizer, 
+    the squared l2 -norm, and return the value of the loss in a specific point W.
+    """
+
     def loss_function(self, x, y, w):
         reg_term = self.lamda / 2 * np.linalg.norm(w) ** 2
         loss_term = np.mean(np.logaddexp(0, -y * np.dot(x, w)))
         total_value = reg_term + loss_term
         return total_value
+
+    """
+    This method implements the gradient of the function loss.
+    """
 
     def loss_gradient(self, x, y, w):
         n = len(x)
@@ -35,6 +44,11 @@ class Function(object):
             return 1
         else:
             return -1
+
+    """
+    This method returns the accuracy of the logistic regression with a specific W 
+    (obtained minimizing the loss function, and passed by argument w) in a set of data passed by arguments (x_t, y_t)
+    """
 
     def testing(self, x_t, y_t, w):
         count = 0
