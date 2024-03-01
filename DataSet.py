@@ -31,33 +31,18 @@ class DataSet:
         self.data_train = tmp_x[:split_index]
         self.data_test = tmp_x[split_index:]
 
+    def fix(self, numer):
+        self.labels_train[self.labels_train == numer] = -1
+        self.labels_test[self.labels_test == numer] = -1
+
+    def print_balance(self):
         count_1 = np.count_nonzero(self.labels_train == 1)
         count_minus_1 = np.count_nonzero(self.labels_train == -1)
-
-        # Calculate total number of elements
         total_elements = self.labels_train.size
-
-        # Calculate percentages
         percentage_1 = (count_1 / total_elements) * 100
         percentage_minus_1 = (count_minus_1 / total_elements) * 100
 
         print("Balance train-set: 1: " + str(percentage_1) + "% -1: " + str(percentage_minus_1)+"%")
-
-        count_1 = np.count_nonzero(self.labels_test == 1)
-        count_minus_1 = np.count_nonzero(self.labels_test == -1)
-
-        # Calculate total number of elements
-        total_elements = self.labels_test.size
-
-        # Calculate percentages
-        percentage_1 = (count_1 / total_elements) * 100
-        percentage_minus_1 = (count_minus_1 / total_elements) * 100
-
-        print("Balance test-set: 1: " + str(percentage_1) + "% -1: " + str(percentage_minus_1)+"%")
-
-    def fix(self, numer):
-        self.labels_train[self.labels_train == numer] = -1
-        self.labels_test[self.labels_test == numer] = -1
 
     # This two function is only for scipy to minimize with LBFGS-B
     def loss_function(self, w):

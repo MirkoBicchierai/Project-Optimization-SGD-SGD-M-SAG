@@ -99,21 +99,6 @@ class Solver:
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
 
-    def lipschitz_estimate(self, f, x, y, w):
-        l_lip = 100
-        max_iter = 100
-        old_loss = f.loss_function(x, y, w)
-        norm = pow(np.linalg.norm(old_loss), 2)
-
-        for sus in range(max_iter):
-            new_w = w - (1 / l_lip) * old_loss
-            new_loss = f.loss_function(x, y, new_w)
-            if new_loss <= old_loss - (1 / (2 * l_lip)) * norm:
-                break
-
-            l_lip = l_lip * 2
-        return l_lip
-
     def sag_algorithm_v2(self, f, dataset, epochs, lr="L-LS"):
 
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
@@ -183,3 +168,18 @@ class Solver:
             y_plt.append(f.loss_function(x, y, w))
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
+
+    def lipschitz_estimate(self, f, x, y, w):
+        l_lip = 100
+        max_iter = 100
+        old_loss = f.loss_function(x, y, w)
+        norm = pow(np.linalg.norm(old_loss), 2)
+
+        for sus in range(max_iter):
+            new_w = w - (1 / l_lip) * old_loss
+            new_loss = f.loss_function(x, y, new_w)
+            if new_loss <= old_loss - (1 / (2 * l_lip)) * norm:
+                break
+
+            l_lip = l_lip * 2
+        return l_lip
