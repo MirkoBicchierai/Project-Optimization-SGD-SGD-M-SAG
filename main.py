@@ -62,9 +62,9 @@ def phishing(f, dataset, epochs):
     print("-------------------------------------------------------------------")
 
     lr_sgd = 1e-4
-    beta_sgd = 0.20
-    lr_sag = 1e-4
-    lr_sagv2 = 1e-5
+    beta_sgd = 0.35
+    lr_sag = 5 * 1e-5
+    lr_sagv2 = 3 * 1e-5
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -83,55 +83,10 @@ def ijcnn1(f, dataset, epochs):
     dataset.print_balance()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 1e-4
+    lr_sgd = 1e-5
     beta_sgd = 0.35
-    lr_sag = 1e-4
-    lr_sagv2 = 1e-5
-
-    test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
-
-
-def skin_nonskin(f, dataset, epochs):
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
-
-    print("-------------------------------------------------------------------")
-    print("DataSet: skin_nonskin")
-
-    dataset.load_data("DataSet/skin_nonskin", "skin_nonskin")
-    dataset.fix(2)
-    f.set_lamda(1 / dataset.data_train.shape[0])
-
-    print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
-        dataset.data_train.shape[1]))
-    dataset.print_balance()
-    print("-------------------------------------------------------------------")
-
-    lr_sgd = 1e-8
-    beta_sgd = 0.20
-    lr_sag = 1e-9
-    lr_sagv2 = 1e-9
-
-    test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
-
-
-def cod_rna(f, dataset, epochs):
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
-
-    print("-------------------------------------------------------------------")
-    print("DataSet: COD-RNA")
-
-    dataset.load_data("DataSet/cod-rna", "cod-rna")
-    f.set_lamda(1 / dataset.data_train.shape[0])
-
-    print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
-        dataset.data_train.shape[1]))
-    dataset.print_balance()
-    print("-------------------------------------------------------------------")
-
-    lr_sgd = 1e-7
-    beta_sgd = 0.25
-    lr_sag = 1e-2
-    lr_sagv2 = 1e-3
+    lr_sag = 2 * 1e-5
+    lr_sagv2 = 6 * 1e-6
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -172,9 +127,9 @@ def australian(f, dataset, epochs):
     dataset.print_balance()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 2*1e-4
+    lr_sgd = 2 * 1e-4
     beta_sgd = 0.4
-    lr_sag = 3*1e-4
+    lr_sag = 3 * 1e-4
     lr_sagv2 = 1e-4
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
@@ -216,9 +171,9 @@ def a6a(f, dataset, epochs):
     dataset.print_balance()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 1e-4
+    lr_sgd = 2 * 1e-5
     beta_sgd = 0.4
-    lr_sag = 1e-3
+    lr_sag = 3 * 1e-5
     lr_sagv2 = 1e-5
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
@@ -238,10 +193,10 @@ def a7a(f, dataset, epochs):
     dataset.print_balance()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 1e-4
-    beta_sgd = 0.4
-    lr_sag = 1e-3
-    lr_sagv2 = 1e-5
+    lr_sgd = (1.5) * 1e-5
+    beta_sgd = 0.5
+    lr_sag = 2 * 1e-5
+    lr_sagv2 = 5 * 1e-6
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -260,32 +215,10 @@ def a8a(f, dataset, epochs):
     dataset.print_balance()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 1e-4
-    beta_sgd = 0.4
-    lr_sag = 1e-3
-    lr_sagv2 = 1e-5
-
-    test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
-
-
-def a9a(f, dataset, epochs):
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
-
-    print("-------------------------------------------------------------------")
-    print("DataSet: a9a")
-
-    dataset.load_data("DataSet/a9a", "a9a")
-    f.set_lamda(1 / dataset.data_train.shape[0])
-
-    print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
-        dataset.data_train.shape[1]))
-    dataset.print_balance()
-    print("-------------------------------------------------------------------")
-
-    lr_sgd = 1e-4
-    beta_sgd = 0.4
-    lr_sag = 1e-3
-    lr_sagv2 = 1e-5
+    lr_sgd = 1e-5
+    beta_sgd = 0.35
+    lr_sag = 2 * 1e-5
+    lr_sagv2 = 4 * 1e-6
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -301,6 +234,9 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
     w = np.ones(dataset.data_train.shape[1], dtype="float128")
     sol = sc.minimize(dataset.loss_function, w, method='L-BFGS-B',
                       jac=dataset.loss_gradient, callback=print_callback, options={'maxiter': epochs}).x
+
+    print("Accuracy L-BFGS-B: " + str(round(f.testing(dataset.data_test, dataset.labels_test, sol), 2)) + "%")
+
     print("Norm solution:", np.linalg.norm(sol))
     print("-------------------------------------------------------------------")
     list_w_LBFGSB = [w] + list_w_LBFGSB
@@ -388,15 +324,11 @@ if __name__ == '__main__':
     dataset = DataSet(split)
     exe = Solver()
 
-    # skin_nonskin(f, dataset, epochs)  # OK DA VEDERE IPER-LENTO
-    # german_numer_scale(f, dataset, epochs)  # OK 100
-    # phishing(f, dataset, epochs)  # OK 300
-    # ijcnn1(f, dataset, epochs)  # ok
-    # cod_rna(f, dataset, epochs)  # OK 500
-
-    australian(f, dataset, epochs)  # OK 100 seed(17)
-    # a5a(f, dataset, epochs)  # OK 500
-    # a6a(f, dataset, epochs)  # DA VEDERE IPER-LENTO
-    # a7a(f, dataset, epochs) # DA VEDERE IPER-LENTO
-    # a8a(f, dataset, epochs) # DA VEDERE IPER-LENTO
-    # a9a(f, dataset, epochs) # DA VEDERE IPER-LENTO
+    # ijcnn1(f, dataset, epochs)  # OK 1250-50 seed(17)
+    # a8a(f, dataset, epochs) # OK 1250-50 seed(17)
+    # phishing(f, dataset, epochs)  # OK 300-20 seed(17)
+    # german_numer_scale(f, dataset, epochs)  # OK 100-20 seed(17)
+    # australian(f, dataset, epochs)  # OK 50-20 seed(17)
+    # a5a(f, dataset, epochs)  # OK 500-20 seed(17)
+    # a6a(f, dataset, epochs)  # OK 650-50 seed(17)
+    # a7a(f, dataset, epochs)  # 1000-50 seed(17)

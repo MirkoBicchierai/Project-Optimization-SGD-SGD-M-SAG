@@ -4,13 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Add git_Image and lipschitz_estimate fix">
+    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Add round to accuracy">
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a5a_epochs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a5a_epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a5a_time.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a5a_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a6a_epochs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a6a_epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a6a_time.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a6a_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a7a_epochs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a7a_epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a7a_time.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a7a_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a8a_epochs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a8a_epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a8a_time.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/a8a_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/australian_epochs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/australian_epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/australian_time.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/australian_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/german_numer_epochs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/german_numer_epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/german_numer_time.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/german_numer_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/ijcnn1_epoch.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/ijcnn1_epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/ijcnn1_time.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/ijcnn1_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/phishing_epochs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/phishing_epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/phishing_time.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot/phishing_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a5a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a6a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a7a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a8a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/australian" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/german_numer" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/ijcnn1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/phishing" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataSet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preProcessDtaset.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,34 +84,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Solver.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main3.executor&quot;: &quot;Run&quot;,
-    &quot;Python.preProcessDtaset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.testBro.executor&quot;: &quot;Run&quot;,
-    &quot;Python.testsus.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/mirko/PycharmProjects/Project Work Optimization/DataSet&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.Solver.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.main2.executor": "Run",
+    "Python.main3.executor": "Run",
+    "Python.preProcessDtaset.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.test2.executor": "Run",
+    "Python.testBro.executor": "Run",
+    "Python.testsus.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/mirko/PycharmProjects/Project Work Optimization",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.splitter.proportion": "0.28767124",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/DataSet" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/DataSet" />
       <recent name="$PROJECT_DIR$/Git_Image" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -245,8 +285,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main2" />
-        <item itemvalue="Python.main3" />
         <item itemvalue="Python.Solver" />
+        <item itemvalue="Python.main3" />
         <item itemvalue="Python.testsus" />
         <item itemvalue="Python.testBro" />
       </list>
@@ -309,7 +349,9 @@
       <workItem from="1709196765021" duration="622000" />
       <workItem from="1709202025694" duration="1018000" />
       <workItem from="1709211415135" duration="11081000" />
-      <workItem from="1709247620927" duration="6323000" />
+      <workItem from="1709247620927" duration="6625000" />
+      <workItem from="1709288579089" duration="1396000" />
+      <workItem from="1709289981489" duration="16396000" />
     </task>
     <task id="LOCAL-00001" summary="Start project">
       <option name="closed" value="true" />
@@ -463,7 +505,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709202723785</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Improve main Code Flow">
+      <option name="closed" value="true" />
+      <created>1709253967605</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1709253967605</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add round to accuracy">
+      <option name="closed" value="true" />
+      <created>1709254228451</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1709254228451</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,17 +558,19 @@
     <MESSAGE value="Clear solver class and fix sag algorithm (version 1 and version 2)&#10;&#10;Remain fix version with L, lipschitz_estimate function still have problem" />
     <MESSAGE value="clear code" />
     <MESSAGE value="Add git_Image and lipschitz_estimate fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add git_Image and lipschitz_estimate fix" />
+    <MESSAGE value="Improve main Code Flow" />
+    <MESSAGE value="Add round to accuracy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add round to accuracy" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$testBro.coverage" NAME="testBro Coverage Results" MODIFIED="1708677564653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$test.coverage" NAME="main Coverage Results" MODIFIED="1708548932521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$testsus.coverage" NAME="testsus Coverage Results" MODIFIED="1708731003137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_Work_Optimization$Solver.coverage" NAME="Solver Coverage Results" MODIFIED="1709164754051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_Work_Optimization$Solver.coverage" NAME="Solver Coverage Results" MODIFIED="1709295254088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1708506917712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1709225783243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1709306903648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$main3.coverage" NAME="main3 Coverage Results" MODIFIED="1709165898844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$preProcessDtaset.coverage" NAME="preProcessDtaset Coverage Results" MODIFIED="1708521384847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1709253304753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1709307325173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

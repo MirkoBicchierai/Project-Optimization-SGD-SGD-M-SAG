@@ -1,0 +1,26 @@
+-------------------------------------------------------------------
+DataSet: german_numer_scale
+Samples: 1000  features: 25
+Balance train-set: 1: 30.0% -1: 70.0%
+-------------------------------------------------------------------
+Accuracy L-BFGS-B: 77.0%
+Norm solution: 2.2136848376902925
+-------------------------------------------------------------------
+SGD Algorithms
+100%|██████████| 50/50 [00:00<00:00, 112.34it/s]
+Accuracy SGD: 74.5%
+SGD-M Algorithms
+100%|██████████| 50/50 [00:00<00:00, 114.06it/s]
+Accuracy SGD Momentum: 74.0%
+SAG Algorithms
+100%|██████████| 50/50 [00:00<00:00, 105.00it/s]
+Accuracy SAG: 75.0%
+SAGV2 Algorithms
+100%|██████████| 50/50 [00:01<00:00, 40.78it/s]
+Accuracy SAGV2: 74.0%
+SAG-L Algorithms
+100%|██████████| 50/50 [00:14<00:00,  3.42it/s]
+  0%|          | 0/50 [00:00<?, ?it/s]Accuracy SAG-LS: 66.5%
+SAGV2-L Algorithms
+100%|██████████| 50/50 [00:16<00:00,  3.12it/s]
+Accuracy SAGV2-LS: 76.0%

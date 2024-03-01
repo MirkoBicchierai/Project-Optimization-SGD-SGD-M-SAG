@@ -1,0 +1,27 @@
+"/home/mirko/PycharmProjects/Project Work Optimization/.venv/bin/python" /home/mirko/PycharmProjects/Project Work Optimization/main.py 
+-------------------------------------------------------------------
+DataSet: a5a
+Samples: 6414  features: 123
+Balance train-set: 1: 24.01% -1: 75.99%
+-------------------------------------------------------------------
+Accuracy L-BFGS-B: 85.04%
+Norm solution: 6.277388379543753
+-------------------------------------------------------------------
+SGD Algorithms
+100%|██████████| 50/50 [00:03<00:00, 14.38it/s]
+Accuracy SGD: 73.89%
+SGD-M Algorithms
+100%|██████████| 50/50 [00:04<00:00, 12.32it/s]
+Accuracy SGD Momentum: 75.6%
+SAG Algorithms
+100%|██████████| 50/50 [00:04<00:00, 11.04it/s]
+Accuracy SAG: 75.06%
+SAGV2 Algorithms
+100%|██████████| 50/50 [00:27<00:00,  1.83it/s]
+Accuracy SAGV2: 77.08%
+SAG-L Algorithms
+100%|██████████| 50/50 [00:25<00:00,  1.97it/s]
+Accuracy SAG-LS: 79.58%
+SAGV2-L Algorithms
+100%|██████████| 50/50 [00:49<00:00,  1.01it/s]
+Accuracy SAGV2-LS: 82.93%
