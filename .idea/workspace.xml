@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Readme file">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Add all comment for all function/method in the code">
       <change beforePath="$PROJECT_DIR$/DataSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Function.py" beforeDir="false" afterPath="$PROJECT_DIR$/Function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +308,7 @@
       <workItem from="1709211415135" duration="11081000" />
       <workItem from="1709247620927" duration="6625000" />
       <workItem from="1709288579089" duration="1396000" />
-      <workItem from="1709289981489" duration="21538000" />
+      <workItem from="1709289981489" duration="21913000" />
     </task>
     <task id="LOCAL-00001" summary="Start project">
       <option name="closed" value="true" />
@@ -498,7 +494,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709309692961</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Add all comment for all function/method in the code">
+      <option name="closed" value="true" />
+      <created>1709315244133</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1709315244133</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -539,7 +543,8 @@
     <MESSAGE value="Add round to accuracy" />
     <MESSAGE value="Add all final plot of accuracy and pdf/png graph" />
     <MESSAGE value="Readme file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Readme file" />
+    <MESSAGE value="Add all comment for all function/method in the code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add all comment for all function/method in the code" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$testBro.coverage" NAME="testBro Coverage Results" MODIFIED="1708677564653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

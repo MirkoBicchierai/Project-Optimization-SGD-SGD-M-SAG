@@ -12,8 +12,8 @@ class DataSet:
         self.name = ""
 
     """
-        This method load the dataset by a path of a dataset (passed by arguments path), and split it into training 
-        and test sets (80% for train and 20% for test sets), after a simple shuffle
+        This method load the dataset by a path of a dataset (passed by arguments path), split it into training 
+        and test sets (80% for train and 20% for test sets), after a simple shuffle and add a feature all 1 (Unbiased)
     """
 
     def load_data(self, path, name):
