@@ -61,6 +61,13 @@ class DataSet:
             "Balance train-set: 1: " + str(round(percentage_1, 2)) + "% -1: " + str(round(percentage_minus_1, 2)) + "%")
 
     """
+        This method print the number of elements in the train dataset that aren't zeros
+    """
+    def count_non_zeros(self):
+        count_non_zero = np.count_nonzero(self.data_train)
+        print("Non zero elements: " + str(count_non_zero))
+
+    """
         The following 2 two method are the same inside function Class, 
         there are duplicated used for the method "minimize" of scipy.optimize.minimize library
     """

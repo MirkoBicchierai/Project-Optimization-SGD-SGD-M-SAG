@@ -84,6 +84,7 @@ def phishing(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
         dataset.data_train.shape[1]))
     dataset.print_balance()
+    dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
     lr_sgd = 1e-4
@@ -106,6 +107,7 @@ def ijcnn1(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
         dataset.data_train.shape[1]))
     dataset.print_balance()
+    dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
     lr_sgd = 1e-5
@@ -124,6 +126,7 @@ def german_numer_scale(f, dataset, epochs):
 
     dataset.load_data("DataSet/german_numer_scale", "german_numer_scale")
     f.set_lamda(1 / dataset.data_train.shape[0])
+    dataset.count_non_zeros()
 
     print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
         dataset.data_train.shape[1]))
@@ -150,6 +153,7 @@ def australian(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
         dataset.data_train.shape[1]))
     dataset.print_balance()
+    dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
     lr_sgd = 2 * 1e-4
@@ -172,6 +176,7 @@ def a5a(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
         dataset.data_train.shape[1]))
     dataset.print_balance()
+    dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
     lr_sgd = 3 * 1e-5
@@ -194,6 +199,7 @@ def a6a(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
         dataset.data_train.shape[1]))
     dataset.print_balance()
+    dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
     lr_sgd = 2 * 1e-5
@@ -216,6 +222,7 @@ def a7a(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
         dataset.data_train.shape[1]))
     dataset.print_balance()
+    dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
     lr_sgd = (1.5) * 1e-5
@@ -238,6 +245,7 @@ def a8a(f, dataset, epochs):
     print("Samples: " + str(dataset.data_train.shape[0] + dataset.data_test.shape[0]) + "  features: " + str(
         dataset.data_train.shape[1]))
     dataset.print_balance()
+    dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
     lr_sgd = 1e-5

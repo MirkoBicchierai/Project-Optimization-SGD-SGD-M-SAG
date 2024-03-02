@@ -2,6 +2,7 @@
 DataSet: german_numer_scale
 Samples: 1000  features: 25
 Balance train-set: 1: 30.0% -1: 70.0%
+Non zero elements: 19201
 -------------------------------------------------------------------
 Accuracy L-BFGS-B: 77.0%
 Norm solution: 2.2136848376902925

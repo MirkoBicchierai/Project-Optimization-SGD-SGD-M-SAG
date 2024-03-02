@@ -2,6 +2,7 @@
 DataSet: ijcnn1
 Samples: 49990  features: 23
 Balance train-set: 1: 9.66% -1: 90.34%
+Non zero elements: 559887
 -------------------------------------------------------------------
 Accuracy L-BFGS-B: 92.1%
 Norm solution: 20.574575619588835

@@ -2,6 +2,7 @@
 DataSet: a7a
 Samples: 16100  features: 123
 Balance train-set: 1: 24.44% -1: 75.56%
+Non zero elements: 191516
 -------------------------------------------------------------------
 Accuracy L-BFGS-B: 84.97%
 Norm solution: 6.962282518294687
