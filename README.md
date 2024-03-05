@@ -4,6 +4,8 @@ University project, implementation in Python of three optimization algorithms: S
 
 All dataset used are available here : https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html
 
+A project report in Italian is available here: https://www.overleaf.com/read/qcwpphbxwptp#7ed7bc
+
 # Results:
 
 <h4>Dataset: German-Numer </ha>
