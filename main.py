@@ -53,13 +53,14 @@ def plot_full(file_name, label, x, y, x_label):
     y = np.array(y)
     if x_label == "Time":
         for i in range(x.shape[0]):
-            plt.plot(x[i], y[i], label=label[i + 1])
+            plt.plot(x[i], y[i + 1], label=label[i + 1])
     else:
         for i in range(x.shape[0]):
-            plt.plot(x[i], y[i], label=label[i])
+            plt.plot(x[i] + 1, y[i], label=label[i]) # , marker='.'
     plt.xlabel(x_label)
     plt.ylabel('Loss')
     plt.title('Training loss - ' + x_label)
+    plt.xscale('log')
     plt.legend()
     plt.grid(True)
     plt.savefig("Plot/" + file_name)
@@ -72,7 +73,7 @@ The value of alpha and beta there are inside are the best value that i fuond for
 
 
 def phishing(f, dataset, epochs):
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
+    labels = ["LBFGS-B", "SAG-L", "SAGV2-L" , "SGD", "SGD-M", "SAG", "SAGV2"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: phishing")
@@ -119,7 +120,7 @@ def ijcnn1(f, dataset, epochs):
 
 
 def german_numer_scale(f, dataset, epochs):
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]  #
 
     print("-------------------------------------------------------------------")
     print("DataSet: german_numer_scale")
@@ -136,7 +137,7 @@ def german_numer_scale(f, dataset, epochs):
     lr_sgd = 5 * 1e-4
     beta_sgd = 0.15
     lr_sag = 1e-3
-    lr_sagv2 = 1e-4
+    lr_sagv2 = 2 * 1e-3
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -165,7 +166,7 @@ def australian(f, dataset, epochs):
 
 
 def a5a(f, dataset, epochs):
-    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]  #
 
     print("-------------------------------------------------------------------")
     print("DataSet: a5a")
@@ -179,10 +180,10 @@ def a5a(f, dataset, epochs):
     dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 3 * 1e-5
+    lr_sgd = 4 * 1e-5
     beta_sgd = 0.3
-    lr_sag = 4 * 1e-5
-    lr_sagv2 = 1e-5
+    lr_sag = 5 * 1e-5
+    lr_sagv2 = 2*1e-4
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -255,9 +256,11 @@ def a8a(f, dataset, epochs):
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
+
 """  
 This function call all the alghoritm method inside the Solver Class and print/plot all the results
 """
+
 
 def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
     global list_w_LBFGSB
@@ -363,8 +366,8 @@ if __name__ == '__main__':
     # ijcnn1(f, dataset, epochs)  # OK 1250-50 seed(17)
     # a8a(f, dataset, epochs) # OK 1250-50 seed(17)
     # phishing(f, dataset, epochs)  # OK 300-20 seed(17)
-    # german_numer_scale(f, dataset, epochs)  # OK 100-20 seed(17)
+    german_numer_scale(f, dataset, epochs)  # OK 100-20 seed(17)
     # australian(f, dataset, epochs)  # OK 50-20 seed(17)
-    # a5a(f, dataset, epochs)  # OK 500-20 seed(17)
+    a5a(f, dataset, epochs)  # OK 500-20 seed(17)
     # a6a(f, dataset, epochs)  # OK 650-50 seed(17)
     # a7a(f, dataset, epochs)  # 1000-50 seed(17)

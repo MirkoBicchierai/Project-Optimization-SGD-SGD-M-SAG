@@ -101,22 +101,25 @@ class Solver:
         x_plt.append(0)
         x_times.append(0)
         y_plt.append(f.loss_function(x, y, w))
-
         v_index = list(range(n_samples))
-
         for epoch in tqdm(range(epochs)):
+            l_lip = 1
             np.random.shuffle(v_index)
             start_time = time.time()
+
             for i in v_index:
-                g = f.loss_gradient(x[i:i + 1], y[i:i + 1], w)
-                d = d - memory[i] + g
-                memory[i] = g
+
                 if learn_rate == "L-LS":
-                    l = self.lipschitz_estimate(f, x[i:i + 1], y[i:i + 1], w)
-                    lr = (1 / (16 * l))
+                    l_lip, k = self.lipschitz_estimate(f, x[i:i + 1], y[i:i + 1], w, l_lip, n_samples)
+                    # print("Epoch", epoch, "Constant L:", l_lip, "Iteration:", k)
+                    lr = (1 / (16*l_lip))
                 else:
                     lr = learn_rate
-                w -= (lr / n_samples) * d
+
+                g = f.loss_gradient_f(x[i], y[i], w)
+                d = d - memory[i] + g
+                memory[i] = g
+                w = (1 - (lr * f.lamda)) * w - (lr / n_samples) * d
 
             x_plt.append(epoch)
             y_plt.append(f.loss_function(x, y, w))
@@ -134,7 +137,6 @@ class Solver:
     """
 
     def sag_algorithm_v2(self, f, dataset, epochs, lr="L-LS"):
-
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
         n_samples, n_features = x.shape
         w = np.ones(n_features, dtype="float128")
@@ -143,31 +145,30 @@ class Solver:
         x_plt.append(0)
         x_times.append(0)
         y_plt.append(f.loss_function(x, y, w))
-
         memory = np.zeros((n_samples, n_features))
         d = np.mean(memory, axis=0)
 
         v_index = list(range(n_samples))
-
+        m = 0
+        c = np.zeros(n_samples)
         for epoch in tqdm(range(epochs)):
 
+            l_lip = 1
             w_memory = np.zeros((n_features, n_samples))
             t = np.zeros(n_features)
             agg = np.zeros(n_features)
-            c = np.zeros(n_samples)
-            m = 0
             np.random.shuffle(v_index)
             counter = 0
-
             start_time = time.time()
+
             for idx in v_index:
                 if c[idx] == 0:
                     m = m + 1
                     c[idx] = 1
 
                 if lr == "L-LS":
-                    l = self.lipschitz_estimate(f, x[idx:idx + 1], y[idx:idx + 1], w)
-                    learning_rate = (1 / (16 * l))
+                    l_lip, k = self.lipschitz_estimate(f, x[idx:idx + 1], y[idx:idx + 1], w, l_lip, n_samples)
+                    learning_rate = (1 / (l_lip*16))
                 else:
                     learning_rate = lr
 
@@ -182,16 +183,16 @@ class Solver:
                             agg[j] = t[j]
                             t[j] = 0
 
-                g = f.loss_gradient(x[idx:idx + 1], y[idx:idx + 1], w)
+                g = f.loss_gradient_f(x[idx], y[idx], w)
                 d = d - memory[idx] + g
                 memory[idx] = g
-
                 for var in range(len(agg)):
                     if agg[var] == 0:
-                        w[var] = w[var] - (learning_rate / m) * d[var]
+                        w[var] = (1 - (learning_rate * f.lamda)) * w[var] - (learning_rate / m) * d[var]
                     if agg[var] > 0:
                         old_iter = counter - agg[var]
-                        w[var] = w_memory[var, int(old_iter)] - ((learning_rate * agg[var]) / m) * d[var]
+                        w[var] = (1 - (learning_rate * f.lamda)) * w_memory[var, int(old_iter)] - (
+                                (learning_rate * agg[var]) / m) * d[var]
                         agg[var] = 0
 
                 w_memory[:, counter] = w
@@ -205,20 +206,28 @@ class Solver:
 
     """
         lipschitz_estimate(self, f, x, y, w):
-        
+                
         Method to do the line search to found the lipschitz constant L, starting by initial value of L = 1
         This line search is described in the paper at section 4.6.
     """
 
-    def lipschitz_estimate(self, f, x, y, w):
-        l_lip = 1
-        max_iter = 100
-        old_loss = f.loss_function(x, y, w)
-        norm = pow(np.linalg.norm(old_loss), 2)
-        for sus in range(max_iter):
-            new_w = w - (1 / l_lip) * old_loss
-            new_loss = f.loss_function(x, y, new_w)
-            if new_loss <= old_loss - (1 / (2 * l_lip)) * norm:
-                break
-            l_lip = l_lip * 2
-        return l_lip
+    def lipschitz_estimate(self, f, x, y, w, l, n_samples):
+        x = x.flatten()
+        y = y.flatten()
+
+        l_lip = l / pow(2, 1 / n_samples)
+        max_iter = 50
+
+        old_loss = f.loss_function_f(x, y, w)
+        old_g = f.loss_gradient_f(x, y, w)
+        norm = pow(np.linalg.norm(old_g), 2)
+        k = 0
+        if pow(norm, 2) > 1e-8:
+            while k < max_iter:
+                new_w = w - (1 / (l_lip)) * old_g
+                new_loss = f.loss_function_f(x, y, new_w)
+                if new_loss <= old_loss - (1 / (2 * l_lip)) * norm:
+                    break
+                l_lip = l_lip * 2
+                k = k + 1
+        return l_lip, k

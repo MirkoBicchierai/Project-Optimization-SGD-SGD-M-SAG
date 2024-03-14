@@ -8,6 +8,13 @@ class Function(object):
 
     def set_lamda(self, lamda):
         self.lamda = lamda
+        # self.lamda = 1
+
+    def loss_function_f(self, x, y, w):
+        return np.log(1 + (np.exp(-y * np.dot(w, x))))
+
+    def loss_gradient_f(self, x, y, w):
+        return (- y * x) / (1 + np.exp(y * np.dot(x, w)))
 
     """
     This method implements the function loss of the logist regression with a strongly-convex regularizer, 
