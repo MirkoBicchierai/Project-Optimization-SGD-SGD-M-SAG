@@ -14,7 +14,6 @@ class Solver:
 
     def sgd(self, f, dataset, epochs, learn_rate):
         x, y = np.array(dataset.data_train, dtype="float128"), np.array(dataset.labels_train, dtype="float128")
-        # w = np.zeros(dataset.data_train.shape[1], dtype="float128")
         w = np.ones(dataset.data_train.shape[1], dtype="float128")
 
         n_obs = x.shape[0]
@@ -33,7 +32,7 @@ class Solver:
                 direction = f.loss_gradient(x[i:i + 1], y[i:i + 1], w)
                 w = w - learn_rate * direction
 
-            x_plt.append(epoch)
+            x_plt.append(epoch + 1)
             y_plt.append(f.loss_function(x, y, w))
 
             x_times.append((time.time() - start_time) + x_times[-1])
@@ -72,7 +71,7 @@ class Solver:
                 w_memory_momentum = w
                 w = w + diff
 
-            x_plt.append(epoch)
+            x_plt.append(epoch+1)
             y_plt.append(f.loss_function(x, y, w))
             x_times.append((time.time() - start_time) + x_times[-1])
 
@@ -121,7 +120,7 @@ class Solver:
                 memory[i] = g
                 w = (1 - (lr * f.lamda)) * w - (lr / n_samples) * d
 
-            x_plt.append(epoch)
+            x_plt.append(epoch+1)
             y_plt.append(f.loss_function(x, y, w))
             x_times.append((time.time() - start_time) + x_times[-1])
 
@@ -199,7 +198,7 @@ class Solver:
                 counter = counter + 1
 
             x_times.append((time.time() - start_time) + x_times[-1])
-            x_plt.append(epoch)
+            x_plt.append(epoch+1)
             y_plt.append(f.loss_function(x, y, w))
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)
@@ -224,7 +223,7 @@ class Solver:
         k = 0
         if pow(norm, 2) > 1e-8:
             while k < max_iter:
-                new_w = w - (1 / (l_lip)) * old_g
+                new_w = w - (1 / l_lip) * old_g
                 new_loss = f.loss_function_f(x, y, new_w)
                 if new_loss <= old_loss - (1 / (2 * l_lip)) * norm:
                     break

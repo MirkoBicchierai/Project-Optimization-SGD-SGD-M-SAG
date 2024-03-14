@@ -134,10 +134,10 @@ def german_numer_scale(f, dataset, epochs):
     dataset.print_balance()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 5 * 1e-4
-    beta_sgd = 0.15
-    lr_sag = 1e-3
-    lr_sagv2 = 2 * 1e-3
+    lr_sgd = 1e-3
+    beta_sgd = 0.25
+    lr_sag = 3*1e-3
+    lr_sagv2 = 3 * 1e-3
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -363,11 +363,11 @@ if __name__ == '__main__':
     dataset = DataSet(split)
     exe = Solver()
 
-    # ijcnn1(f, dataset, epochs)  # OK 1250-50 seed(17)
-    # a8a(f, dataset, epochs) # OK 1250-50 seed(17)
-    # phishing(f, dataset, epochs)  # OK 300-20 seed(17)
-    german_numer_scale(f, dataset, epochs)  # OK 100-20 seed(17)
-    # australian(f, dataset, epochs)  # OK 50-20 seed(17)
-    a5a(f, dataset, epochs)  # OK 500-20 seed(17)
-    # a6a(f, dataset, epochs)  # OK 650-50 seed(17)
-    # a7a(f, dataset, epochs)  # 1000-50 seed(17)
+    # ijcnn1(f, dataset, epochs)
+    # a8a(f, dataset, epochs)
+    # phishing(f, dataset, epochs)
+    german_numer_scale(f, dataset, epochs)
+    # australian(f, dataset, epochs)
+    # a5a(f, dataset, epochs)
+    # a6a(f, dataset, epochs)
+    # a7a(f, dataset, epochs)

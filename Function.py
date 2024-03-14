@@ -8,10 +8,17 @@ class Function(object):
 
     def set_lamda(self, lamda):
         self.lamda = lamda
-        # self.lamda = 1
+
+    """
+    This method implements the function loss of the logist regression for a single f_i.
+    """
 
     def loss_function_f(self, x, y, w):
         return np.log(1 + (np.exp(-y * np.dot(w, x))))
+
+    """
+    This method implements the gradient of the logistic regression for a single f_i.
+    """
 
     def loss_gradient_f(self, x, y, w):
         return (- y * x) / (1 + np.exp(y * np.dot(x, w)))
@@ -24,8 +31,7 @@ class Function(object):
     def loss_function(self, x, y, w):
         reg_term = self.lamda / 2 * np.linalg.norm(w) ** 2
         loss_term = np.mean(np.logaddexp(0, -y * np.dot(x, w)))
-        total_value = reg_term + loss_term
-        return total_value
+        return reg_term + loss_term
 
     """
     This method implements the gradient of the function loss.
