@@ -53,6 +53,7 @@ def plot_full(file_name, label, x, y, x_label):
     y = np.array(y)
     if x_label == "Time":
         for i in range(x.shape[0]):
+            x[i][0] = 0.1
             plt.plot(x[i], y[i + 1], label=label[i + 1])
     else:
         for i in range(x.shape[0]):
