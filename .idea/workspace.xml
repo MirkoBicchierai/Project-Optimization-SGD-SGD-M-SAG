@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Add count_non_zeros methods and update the accuracy plot (with count_non_zeros value)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="some fix and add comment to method">
       <change beforePath="$PROJECT_DIR$/Function.py" beforeDir="false" afterPath="$PROJECT_DIR$/Function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -329,7 +327,7 @@
       <workItem from="1710327542679" duration="15000" />
       <workItem from="1710436441243" duration="1942000" />
       <workItem from="1710441740482" duration="651000" />
-      <workItem from="1710447660819" duration="538000" />
+      <workItem from="1710447660819" duration="975000" />
     </task>
     <task id="LOCAL-00001" summary="Start project">
       <option name="closed" value="true" />
@@ -539,7 +537,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709383364647</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="some fix and add comment to method">
+      <option name="closed" value="true" />
+      <created>1710448216869</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1710448216869</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +563,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="GD first implementation" />
     <MESSAGE value="armijo implementation" />
     <MESSAGE value="bo" />
     <MESSAGE value="Create new scheleton" />
@@ -582,7 +587,8 @@
     <MESSAGE value="Add all comment for all function/method in the code" />
     <MESSAGE value="Fix comment" />
     <MESSAGE value="Add count_non_zeros methods and update the accuracy plot (with count_non_zeros value)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add count_non_zeros methods and update the accuracy plot (with count_non_zeros value)" />
+    <MESSAGE value="some fix and add comment to method" />
+    <option name="LAST_COMMIT_MESSAGE" value="some fix and add comment to method" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$testBro.coverage" NAME="testBro Coverage Results" MODIFIED="1708677564653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -593,6 +599,6 @@
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1709306903648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$main3.coverage" NAME="main3 Coverage Results" MODIFIED="1709165898844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$preProcessDtaset.coverage" NAME="preProcessDtaset Coverage Results" MODIFIED="1708521384847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1710447896644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1710448573141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
