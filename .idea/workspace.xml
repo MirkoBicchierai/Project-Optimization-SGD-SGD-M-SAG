@@ -4,47 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Plot fix">
+    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Add final plot for all dataset">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a5a_epochs.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a5a_epochs.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a5a_epochs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a5a_epochs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a5a_time.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a5a_time.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a5a_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a5a_time.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a6a_epochs.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a6a_epochs.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a6a_epochs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a6a_epochs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a6a_time.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a6a_time.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a6a_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a6a_time.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a7a_epochs.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a7a_epochs.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a7a_epochs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a7a_epochs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a7a_time.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a7a_time.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a7a_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a7a_time.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a8a_epochs.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a8a_epochs.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a8a_epochs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a8a_epochs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a8a_time.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a8a_time.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/a8a_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/a8a_time.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/australian_epochs.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/australian_epochs.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/australian_epochs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/australian_epochs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/australian_time.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/australian_time.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/australian_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/australian_time.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/german_numer_epochs.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/german_numer_epochs.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/german_numer_epochs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/german_numer_epochs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/german_numer_time.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/german_numer_time.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/german_numer_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/german_numer_time.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/ijcnn1_epochs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/ijcnn1_epochs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/ijcnn1_time.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/ijcnn1_time.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/ijcnn1_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/ijcnn1_time.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/phishing_epochs.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/phishing_epochs.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/phishing_epochs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/phishing_epochs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/phishing_time.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/phishing_time.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot/phishing_time.png" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot/phishing_time.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/a5a" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a5a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/a6a" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a6a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/a7a" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a7a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/a8a" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a8a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/australian" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/australian" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/german_numer" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/german_numer" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/ijcnn1" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/ijcnn1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/phishing" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/phishing" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -282,8 +244,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main2" />
         <item itemvalue="Python.Solver" />
+        <item itemvalue="Python.main2" />
         <item itemvalue="Python.main3" />
         <item itemvalue="Python.testsus" />
         <item itemvalue="Python.testBro" />
@@ -370,7 +332,8 @@
       <workItem from="1710447660819" duration="1268000" />
       <workItem from="1710492426103" duration="1167000" />
       <workItem from="1710496803570" duration="2094000" />
-      <workItem from="1710500017257" duration="7988000" />
+      <workItem from="1710500017257" duration="8354000" />
+      <workItem from="1710513528371" duration="714000" />
     </task>
     <task id="LOCAL-00001" summary="Start project">
       <option name="closed" value="true" />
@@ -604,7 +567,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710448910615</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Add final plot for all dataset">
+      <option name="closed" value="true" />
+      <created>1710508755410</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1710508755410</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -622,7 +593,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create new scheleton" />
     <MESSAGE value="Top tier" />
     <MESSAGE value="New flow" />
     <MESSAGE value="SGD complete and SGD Momentum first try" />
@@ -647,28 +617,18 @@
     <MESSAGE value="some fix and add comment to method" />
     <MESSAGE value="Add second way to calculate gradient with numpy" />
     <MESSAGE value="Plot fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Plot fix" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>376</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Add final plot for all dataset" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add final plot for all dataset" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$testBro.coverage" NAME="testBro Coverage Results" MODIFIED="1708677564653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$test.coverage" NAME="main Coverage Results" MODIFIED="1708548932521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$testsus.coverage" NAME="testsus Coverage Results" MODIFIED="1708731003137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_Work_Optimization$Solver.coverage" NAME="Solver Coverage Results" MODIFIED="1709766555906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_Work_Optimization$Solver.coverage" NAME="Solver Coverage Results" MODIFIED="1710514141081" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1708506917712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1710507199186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$main3.coverage" NAME="main3 Coverage Results" MODIFIED="1709165898844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$preProcessDtaset.coverage" NAME="preProcessDtaset Coverage Results" MODIFIED="1708521384847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1710507441545" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project_Work_Optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1710514143350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

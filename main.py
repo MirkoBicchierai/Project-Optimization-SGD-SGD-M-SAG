@@ -383,6 +383,6 @@ if __name__ == '__main__':
     # german_numer_scale(f, dataset, epochs) # 17
     australian(f, dataset, epochs) # 17
     # a5a(f, dataset, epochs) # 17
-    # a6a(f, dataset, epochs) # 17
-    # a7a(f, dataset, epochs) # 17 bad
+    # a6a(f, dataset, epochs) # 17-32 bad
+    # a7a(f, dataset, epochs) # 17-32 bad
     # a8a(f, dataset, epochs) # 17-32 bad
