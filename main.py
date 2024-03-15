@@ -56,7 +56,7 @@ def plot_full(file_name, label, x, y, x_label):
             plt.plot(x[i], y[i + 1], label=label[i + 1])
     else:
         for i in range(x.shape[0]):
-            plt.plot(x[i] + 1, y[i], label=label[i]) # , marker='.'
+            plt.plot(x[i] + 1, y[i], label=label[i])  # , marker='.'
     plt.xlabel(x_label)
     plt.ylabel('Loss')
     plt.title('Training loss - ' + x_label)
@@ -74,7 +74,7 @@ The value of alpha and beta there are inside are the best value that i fuond for
 
 
 def phishing(f, dataset, epochs):
-    labels = ["LBFGS-B", "SAG-L", "SAGV2-L" , "SGD", "SGD-M", "SAG", "SAGV2"]
+    labels = ["LBFGS-B", "SGD", "SGD-M", "SAG", "SAGV2", "SAG-L", "SAGV2-L"]
 
     print("-------------------------------------------------------------------")
     print("DataSet: phishing")
@@ -89,10 +89,10 @@ def phishing(f, dataset, epochs):
     dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 1e-4
+    lr_sgd = 3*1e-4
     beta_sgd = 0.35
-    lr_sag = 5 * 1e-5
-    lr_sagv2 = 3 * 1e-5
+    lr_sag = 1e-3
+    lr_sagv2 = 2*1e-3
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -115,7 +115,7 @@ def ijcnn1(f, dataset, epochs):
     lr_sgd = 1e-5
     beta_sgd = 0.35
     lr_sag = 2 * 1e-5
-    lr_sagv2 = 6 * 1e-6
+    lr_sagv2 = 4 * 1e-5
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -137,7 +137,7 @@ def german_numer_scale(f, dataset, epochs):
 
     lr_sgd = 1e-3
     beta_sgd = 0.25
-    lr_sag = 3*1e-3
+    lr_sag = 3 * 1e-3
     lr_sagv2 = 3 * 1e-3
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
@@ -158,10 +158,10 @@ def australian(f, dataset, epochs):
     dataset.count_non_zeros()
     print("-------------------------------------------------------------------")
 
-    lr_sgd = 2 * 1e-4
+    lr_sgd = 5 * 1e-4
     beta_sgd = 0.4
-    lr_sag = 3 * 1e-4
-    lr_sagv2 = 1e-4
+    lr_sag = 2 * 1e-3
+    lr_sagv2 = 2 * 1e-3
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -184,7 +184,7 @@ def a5a(f, dataset, epochs):
     lr_sgd = 4 * 1e-5
     beta_sgd = 0.3
     lr_sag = 5 * 1e-5
-    lr_sagv2 = 2*1e-4
+    lr_sagv2 = 2 * 1e-4
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -207,7 +207,7 @@ def a6a(f, dataset, epochs):
     lr_sgd = 2 * 1e-5
     beta_sgd = 0.4
     lr_sag = 3 * 1e-5
-    lr_sagv2 = 1e-5
+    lr_sagv2 = 1e-4
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -229,8 +229,8 @@ def a7a(f, dataset, epochs):
 
     lr_sgd = (1.5) * 1e-5
     beta_sgd = 0.5
-    lr_sag = 2 * 1e-5
-    lr_sagv2 = 5 * 1e-6
+    lr_sag = 4 * 1e-5
+    lr_sagv2 = 1e-4
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -253,7 +253,7 @@ def a8a(f, dataset, epochs):
     lr_sgd = 1e-5
     beta_sgd = 0.35
     lr_sag = 2 * 1e-5
-    lr_sagv2 = 4 * 1e-6
+    lr_sagv2 = 5 * 1e-5
 
     test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2)
 
@@ -294,6 +294,8 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         _, x_step, y_loss, x_times, acc = exe.sgd(f, dataset, epochs, lr_sgd)
         plot(dataset.name + "/sgd_result.png", x_step, y_loss)
         plot(dataset.name + "/sgd_result_time.png", x_times, y_loss)
+        plot(dataset.name + "/sgd_result.pdf", x_step, y_loss)
+        plot(dataset.name + "/sgd_result_time.pdf", x_times, y_loss)
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
@@ -304,6 +306,8 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         _, x_step, y_loss, x_times, acc = exe.sgd_momentum(f, dataset, epochs, lr_sgd, beta_sgd)
         plot(dataset.name + "/sgd_momentum_result.png", x_step, y_loss)
         plot(dataset.name + "/sgd_momentum_result_time.png", x_times, y_loss)
+        plot(dataset.name + "/sgd_momentum_result.pdf", x_step, y_loss)
+        plot(dataset.name + "/sgd_momentum_result_time.pdf", x_times, y_loss)
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
@@ -315,6 +319,8 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs, lr_sag)
         plot(dataset.name + "/sag_result.png", x_step, y_loss)
         plot(dataset.name + "/sag_result_time.png", x_times, y_loss)
+        plot(dataset.name + "/sag_result.pdf", x_step, y_loss)
+        plot(dataset.name + "/sag_result_time.pdf", x_times, y_loss)
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
@@ -325,6 +331,8 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs, lr_sagv2)
         plot(dataset.name + "/sagV2_result.png", x_step, y_loss)
         plot(dataset.name + "/sagV2_result_time.png", x_times, y_loss)
+        plot(dataset.name + "/sagV2_result.pdf", x_step, y_loss)
+        plot(dataset.name + "/sagV2_result_time.pdf", x_times, y_loss)
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
@@ -335,6 +343,8 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         _, x_step, y_loss, x_times, acc = exe.sag_algorithm(f, dataset, epochs)
         plot(dataset.name + "/sag_L_result.png", x_step, y_loss)
         plot(dataset.name + "/sag_L_result_time.png", x_times, y_loss)
+        plot(dataset.name + "/sag_L_result.pdf", x_step, y_loss)
+        plot(dataset.name + "/sag_L_result_time.pdf", x_times, y_loss)
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
@@ -345,13 +355,17 @@ def test(f, dataset, epochs, labels, lr_sgd, beta_sgd, lr_sag, lr_sagv2):
         _, x_step, y_loss, x_times, acc = exe.sag_algorithm_v2(f, dataset, epochs)
         plot(dataset.name + "/sagV2-L_result.png", x_step, y_loss)
         plot(dataset.name + "/sagV2-L_result_time.png", x_times, y_loss)
+        plot(dataset.name + "/sagV2-L_result.pdf", x_step, y_loss)
+        plot(dataset.name + "/sagV2-L_result_time.pdf", x_times, y_loss)
         x_time_all.append(x_times)
         y_loss_all.append(y_loss)
         x_step_all.append(x_step)
         print("Accuracy SAGV2-LS: " + str(round(acc, 2)) + "%")
 
     plot_full(dataset.name + "/full_step_result_last_run.png", labels, x_step_all, y_loss_all, "Epochs")
+    plot_full(dataset.name + "/full_step_result_last_run.pdf", labels, x_step_all, y_loss_all, "Epochs")
     plot_full(dataset.name + "/full_time_result_last_run.png", labels, x_time_all, y_loss_all, "Time")
+    plot_full(dataset.name + "/full_time_result_last_run.pdf", labels, x_time_all, y_loss_all, "Time")
 
 
 if __name__ == '__main__':
@@ -364,11 +378,11 @@ if __name__ == '__main__':
     dataset = DataSet(split)
     exe = Solver()
 
-    # ijcnn1(f, dataset, epochs)
-    # a8a(f, dataset, epochs)
-    # phishing(f, dataset, epochs)
-    german_numer_scale(f, dataset, epochs)
-    # australian(f, dataset, epochs)
-    # a5a(f, dataset, epochs)
-    # a6a(f, dataset, epochs)
-    # a7a(f, dataset, epochs)
+    # ijcnn1(f, dataset, epochs) # 17-32 bad
+    # phishing(f, dataset, epochs) # 17
+    # german_numer_scale(f, dataset, epochs) # 17
+    australian(f, dataset, epochs) # 17
+    # a5a(f, dataset, epochs) # 17
+    # a6a(f, dataset, epochs) # 17
+    # a7a(f, dataset, epochs) # 17 bad
+    # a8a(f, dataset, epochs) # 17-32 bad

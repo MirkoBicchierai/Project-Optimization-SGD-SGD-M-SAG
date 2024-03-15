@@ -1,28 +1,27 @@
-"/home/mirko/PycharmProjects/Project Work Optimization/.venv/bin/python" /home/mirko/PycharmProjects/Project Work Optimization/main.py 
 -------------------------------------------------------------------
 DataSet: a5a
 Samples: 6414  features: 123
-Balance train-set: 1: 24.01% -1: 75.99%
-Non zero elements: 76273
+Balance train-set: 1: 24.71% -1: 75.29%
+Non zero elements: 76286
 -------------------------------------------------------------------
-Accuracy L-BFGS-B: 85.04%
-Norm solution: 6.277388379543753
+Accuracy L-BFGS-B: 85.27%
+Norm solution: 6.2361832490653875
 -------------------------------------------------------------------
 SGD Algorithms
-100%|██████████| 50/50 [00:03<00:00, 14.38it/s]
-Accuracy SGD: 73.89%
+100%|██████████| 50/50 [00:03<00:00, 15.19it/s]
+Accuracy SGD: 74.98%
 SGD-M Algorithms
-100%|██████████| 50/50 [00:04<00:00, 12.32it/s]
-Accuracy SGD Momentum: 75.6%
+100%|██████████| 50/50 [00:03<00:00, 13.28it/s]
+Accuracy SGD Momentum: 77.47%
 SAG Algorithms
-100%|██████████| 50/50 [00:04<00:00, 11.04it/s]
-Accuracy SAG: 75.06%
+100%|██████████| 50/50 [00:02<00:00, 18.10it/s]
+Accuracy SAG: 76.38%
 SAGV2 Algorithms
-100%|██████████| 50/50 [00:27<00:00,  1.83it/s]
-Accuracy SAGV2: 77.08%
+100%|██████████| 50/50 [00:23<00:00,  2.13it/s]
+Accuracy SAGV2: 81.76%
 SAG-L Algorithms
-100%|██████████| 50/50 [00:25<00:00,  1.97it/s]
-Accuracy SAG-LS: 79.58%
+100%|██████████| 50/50 [00:06<00:00,  7.20it/s]
+Accuracy SAG-LS: 84.33%
 SAGV2-L Algorithms
-100%|██████████| 50/50 [00:49<00:00,  1.01it/s]
-Accuracy SAGV2-LS: 82.93%
+100%|██████████| 50/50 [00:27<00:00,  1.79it/s]
+Accuracy SAGV2-LS: 84.57%

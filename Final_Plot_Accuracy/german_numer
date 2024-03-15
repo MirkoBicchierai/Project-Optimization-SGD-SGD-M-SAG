@@ -1,27 +1,27 @@
 -------------------------------------------------------------------
 DataSet: german_numer_scale
+Non zero elements: 19198
 Samples: 1000  features: 25
 Balance train-set: 1: 30.0% -1: 70.0%
-Non zero elements: 19201
 -------------------------------------------------------------------
-Accuracy L-BFGS-B: 77.0%
-Norm solution: 2.2136848376902925
+Accuracy L-BFGS-B: 75.0%
+Norm solution: 2.351175247279452
 -------------------------------------------------------------------
 SGD Algorithms
-100%|██████████| 50/50 [00:00<00:00, 112.34it/s]
-Accuracy SGD: 74.5%
+100%|██████████| 50/50 [00:00<00:00, 109.19it/s]
+Accuracy SGD: 77.0%
 SGD-M Algorithms
-100%|██████████| 50/50 [00:00<00:00, 114.06it/s]
-Accuracy SGD Momentum: 74.0%
+100%|██████████| 50/50 [00:00<00:00, 113.44it/s]
+Accuracy SGD Momentum: 77.0%
 SAG Algorithms
-100%|██████████| 50/50 [00:00<00:00, 105.00it/s]
-Accuracy SAG: 75.0%
+100%|██████████| 50/50 [00:00<00:00, 159.84it/s]
+Accuracy SAG: 76.0%
 SAGV2 Algorithms
-100%|██████████| 50/50 [00:01<00:00, 40.78it/s]
-Accuracy SAGV2: 74.0%
+100%|██████████| 50/50 [00:01<00:00, 43.73it/s]
+Accuracy SAGV2: 76.0%
 SAG-L Algorithms
-100%|██████████| 50/50 [00:14<00:00,  3.42it/s]
-  0%|          | 0/50 [00:00<?, ?it/s]Accuracy SAG-LS: 66.5%
+100%|██████████| 50/50 [00:01<00:00, 46.46it/s]
+Accuracy SAG-LS: 72.5%
 SAGV2-L Algorithms
-100%|██████████| 50/50 [00:16<00:00,  3.12it/s]
-Accuracy SAGV2-LS: 76.0%
+100%|██████████| 50/50 [00:02<00:00, 24.63it/s]
+Accuracy SAGV2-LS: 75.0%

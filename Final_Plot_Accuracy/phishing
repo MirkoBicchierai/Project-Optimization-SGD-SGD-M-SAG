@@ -8,20 +8,20 @@ Accuracy L-BFGS-B: 94.3%
 Norm solution: 24.266445747208035
 -------------------------------------------------------------------
 SGD Algorithms
-100%|██████████| 50/50 [00:04<00:00, 10.35it/s]
-Accuracy SGD: 86.16%
+100%|██████████| 50/50 [00:05<00:00,  9.60it/s]
+Accuracy SGD: 91.99%
 SGD-M Algorithms
-100%|██████████| 50/50 [00:05<00:00,  8.50it/s]
-Accuracy SGD Momentum: 89.69%
+100%|██████████| 50/50 [00:06<00:00,  8.11it/s]
+Accuracy SGD Momentum: 92.9%
 SAG Algorithms
-100%|██████████| 50/50 [00:06<00:00,  8.07it/s]
-Accuracy SAG: 78.83%
+100%|██████████| 50/50 [00:04<00:00, 11.15it/s]
+Accuracy SAG: 93.26%
 SAGV2 Algorithms
-100%|██████████| 50/50 [00:29<00:00,  1.72it/s]
-Accuracy SAGV2: 91.27%
+100%|██████████| 50/50 [00:29<00:00,  1.68it/s]
+Accuracy SAGV2: 93.53%
 SAG-L Algorithms
-100%|██████████| 50/50 [02:24<00:00,  2.88s/it]
-Accuracy SAG-LS: 84.89%
+100%|██████████| 50/50 [00:12<00:00,  4.05it/s]
+Accuracy SAG-LS: 91.77%
 SAGV2-L Algorithms
-100%|██████████| 50/50 [03:02<00:00,  3.65s/it]
-Accuracy SAGV2-LS: 92.81%
+100%|██████████| 50/50 [00:37<00:00,  1.34it/s]
+Accuracy SAGV2-LS: 94.53%

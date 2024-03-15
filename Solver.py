@@ -71,7 +71,7 @@ class Solver:
                 w_memory_momentum = w
                 w = w + diff
 
-            x_plt.append(epoch+1)
+            x_plt.append(epoch + 1)
             y_plt.append(f.loss_function(x, y, w))
             x_times.append((time.time() - start_time) + x_times[-1])
 
@@ -111,7 +111,7 @@ class Solver:
                 if learn_rate == "L-LS":
                     l_lip, k = self.lipschitz_estimate(f, x[i:i + 1], y[i:i + 1], w, l_lip, n_samples)
                     # print("Epoch", epoch, "Constant L:", l_lip, "Iteration:", k)
-                    lr = (1 / (16*l_lip))
+                    lr = (1 / (16 * l_lip))
                 else:
                     lr = learn_rate
 
@@ -120,7 +120,7 @@ class Solver:
                 memory[i] = g
                 w = (1 - (lr * f.lamda)) * w - (lr / n_samples) * d
 
-            x_plt.append(epoch+1)
+            x_plt.append(epoch + 1)
             y_plt.append(f.loss_function(x, y, w))
             x_times.append((time.time() - start_time) + x_times[-1])
 
@@ -167,7 +167,7 @@ class Solver:
 
                 if lr == "L-LS":
                     l_lip, k = self.lipschitz_estimate(f, x[idx:idx + 1], y[idx:idx + 1], w, l_lip, n_samples)
-                    learning_rate = (1 / (l_lip*16))
+                    learning_rate = (1 / (16 * l_lip))
                 else:
                     learning_rate = lr
 
@@ -198,7 +198,7 @@ class Solver:
                 counter = counter + 1
 
             x_times.append((time.time() - start_time) + x_times[-1])
-            x_plt.append(epoch+1)
+            x_plt.append(epoch + 1)
             y_plt.append(f.loss_function(x, y, w))
 
         return w, x_plt, y_plt, x_times, f.testing(dataset.data_test, dataset.labels_test, w)

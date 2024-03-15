@@ -1,27 +1,27 @@
 -------------------------------------------------------------------
 DataSet: Australian
 Samples: 690  features: 15
-Balance train-set: 1: 44.57% -1: 55.43%
-Non zero elements: 7305
+Balance train-set: 1: 44.02% -1: 55.98%
+Non zero elements: 7320
 -------------------------------------------------------------------
-Accuracy L-BFGS-B: 87.68%
-Norm solution: 3.3936130600914822
+Accuracy L-BFGS-B: 85.51%
+Norm solution: 2.8724904039231176
 -------------------------------------------------------------------
 SGD Algorithms
-100%|██████████| 50/50 [00:00<00:00, 192.89it/s]
-  0%|          | 0/50 [00:00<?, ?it/s]Accuracy SGD: 88.41%
+100%|██████████| 50/50 [00:00<00:00, 185.46it/s]
+Accuracy SGD: 86.96%
 SGD-M Algorithms
-100%|██████████| 50/50 [00:00<00:00, 161.97it/s]
-Accuracy SGD Momentum: 88.41%
+100%|██████████| 50/50 [00:00<00:00, 167.55it/s]
+Accuracy SGD Momentum: 86.23%
 SAG Algorithms
-100%|██████████| 50/50 [00:00<00:00, 156.30it/s]
-Accuracy SAG: 88.41%
+100%|██████████| 50/50 [00:00<00:00, 231.67it/s]
+Accuracy SAG: 86.23%
 SAGV2 Algorithms
-100%|██████████| 50/50 [00:00<00:00, 76.36it/s]
-Accuracy SAGV2: 87.68%
+100%|██████████| 50/50 [00:00<00:00, 91.28it/s]
+Accuracy SAGV2: 86.23%
 SAG-L Algorithms
-100%|██████████| 50/50 [00:04<00:00, 11.15it/s]
-  0%|          | 0/50 [00:00<?, ?it/s]Accuracy SAG-LS: 88.41%
+100%|██████████| 50/50 [00:00<00:00, 65.56it/s]
+Accuracy SAG-LS: 84.78%
 SAGV2-L Algorithms
-100%|██████████| 50/50 [00:05<00:00,  9.78it/s]
-Accuracy SAGV2-LS: 88.41%
+100%|██████████| 50/50 [00:01<00:00, 45.17it/s]
+Accuracy SAGV2-LS: 85.51%
