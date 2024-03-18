@@ -36,14 +36,14 @@ class Function(object):
     """
     This method implements the gradient of the function loss with numpy function.
     """
-    def loss_gradient_2(self, x, y, w):
+    def loss_gradient(self, x, y, w):
         r = np.multiply(-y, self.sigmoid(np.multiply(-y, np.dot(x, w))))
         return np.matmul(x.T, r) + self.lamda * w
 
     """
     This method implements the gradient of the function loss with a for.
     """
-    def loss_gradient(self, x, y, w):
+    def loss_gradient_2(self, x, y, w):
         n = len(x)
         reg_gradient = self.lamda * w
         logistic_gradient = np.zeros_like(w)

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Add final plot for all dataset">
+    <list default="true" id="50da0a26-90a0-4378-a28d-d79abd256499" name="Changes" comment="Correct final Plot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Final_Plot_Accuracy/a6a" beforeDir="false" afterPath="$PROJECT_DIR$/Final_Plot_Accuracy/a6a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Function.py" beforeDir="false" afterPath="$PROJECT_DIR$/Function.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -333,7 +331,10 @@
       <workItem from="1710492426103" duration="1167000" />
       <workItem from="1710496803570" duration="2094000" />
       <workItem from="1710500017257" duration="8354000" />
-      <workItem from="1710513528371" duration="714000" />
+      <workItem from="1710513528371" duration="1054000" />
+      <workItem from="1710515544930" duration="2111000" />
+      <workItem from="1710746906726" duration="24000" />
+      <workItem from="1710753534128" duration="665000" />
     </task>
     <task id="LOCAL-00001" summary="Start project">
       <option name="closed" value="true" />
@@ -575,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710508755410</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Correct final Plot">
+      <option name="closed" value="true" />
+      <created>1710514554309</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1710514554309</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +602,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Top tier" />
     <MESSAGE value="New flow" />
     <MESSAGE value="SGD complete and SGD Momentum first try" />
     <MESSAGE value="Start SAG Algorithm" />
@@ -618,7 +626,8 @@
     <MESSAGE value="Add second way to calculate gradient with numpy" />
     <MESSAGE value="Plot fix" />
     <MESSAGE value="Add final plot for all dataset" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add final plot for all dataset" />
+    <MESSAGE value="Correct final Plot" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correct final Plot" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Project_Work_Optimization$testBro.coverage" NAME="testBro Coverage Results" MODIFIED="1708677564653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
